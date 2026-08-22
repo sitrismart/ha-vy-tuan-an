@@ -141,7 +141,7 @@ export function RSVPSection() {
                 Cảm Ơn Bạn Rất Nhiều!
               </h4>
               <p className="text-xs text-[#55383C] max-w-xs mx-auto leading-relaxed">
-                Lời chúc và phản hồi của bạn đã được gửi đến cô dâu Quỳnh Anh & chú rể Bá Kiên. Rất mong được gặp bạn trong ngày trọng đại!
+                Lời chúc và phản hồi của bạn đã được gửi đến cô dâu Hạ Vy & chú rể Tuấn An. Rất mong được gặp bạn trong ngày trọng đại!
               </p>
               <button
                 type="button"
@@ -220,8 +220,8 @@ export function RSVPSection() {
                   className="w-full px-4 py-2.5 rounded-xl bg-[#FAF6F0] border border-[#7A121D]/20 text-xs text-[#2D1217] focus:outline-none focus:ring-2 focus:ring-[#7A121D]/40 transition-all cursor-pointer"
                 >
                   <option value="both">Bạn là khách mời của ai: Bạn chung cả hai</option>
-                  <option value="groom">Bạn là khách mời của: Chú Rể (Bá Kiên)</option>
-                  <option value="bride">Bạn là khách mời của: Cô Dâu (Quỳnh Anh)</option>
+                  <option value="groom">Bạn là khách mời của: Chú Rể (Tuấn An)</option>
+                  <option value="bride">Bạn là khách mời của: Cô Dâu (Hạ Vy)</option>
                 </select>
               </div>
 
