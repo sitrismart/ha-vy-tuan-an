@@ -1,6 +1,6 @@
 {
-  "name": "Thiệp Cưới Bá Kiên & Quỳnh Anh",
-  "description": "Thiệp mời cưới online sang trọng và hiện đại cho Bá Kiên & Quỳnh Anh với lịch trình, timeline, dresscode, album ảnh, RSVP xác nhận tham dự và bản đồ chỉ đường.",
+  "name": "Thiệp Cưới Tuấn An & Hạ Vy",
+  "description": "Thiệp mời cưới online sang trọng cho Tuấn An & Hạ Vy, gồm thông tin ngày giờ, địa điểm, timeline chương trình tiệc, dresscode, album ảnh, RSVP xác nhận tham dự kèm sổ lưu bút, mừng cưới online qua QR chuyển khoản và nhạc nền.",
   "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+  "majorCapabilities": []
 }

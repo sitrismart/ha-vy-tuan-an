@@ -1,20 +1,25 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+# Tuấn An & Hạ Vy Wedding Invitation
 
-# Run and deploy your AI Studio app
+An online wedding invitation website for Tuấn An & Hạ Vy. It includes the wedding date and venue details, the event timeline, dresscode, a photo gallery, an RSVP form with a live guestbook, online gift/money contribution via QR transfer, and background music.
 
-This contains everything you need to run your app locally.
+🔗 Live site: https://ha-vy-tuan-an.vercel.app/
 
-View your app in AI Studio: https://ai.studio/apps/190b41d4-1ad7-4160-8dde-0bff1a73b78d
+## Setup & Run Locally
 
-## Run Locally
-
-**Prerequisites:**  Node.js
-
-
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+1. Clone the project:
+   ```
+   git clone https://github.com/sitrismart/ha-vy-tuan-an.git
+   ```
+2. Move into the project folder:
+   ```
+   cd ha-vy-tuan-an
+   ```
+3. Install dependencies:
+   ```
+   npm install
+   ```
+4. Run the project locally:
+   ```
+   npm run dev
+   ```
+5. Open your browser at: http://localhost:3000
