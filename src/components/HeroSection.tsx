@@ -3,7 +3,7 @@ import { motion } from 'motion/react';
 import { WEDDING_DATA } from '../data/weddingData';
 import { WeddingCountdown } from './WeddingCountdown';
 import { BurgundyCallaLily } from './FloralDecor';
-import { ParallaxLayer, fadeImg, fadeUp, fadeUpTitle, fadeSoft, viewportOnce } from './motion/Reveal';
+import { ParallaxLayer, fadeImg, fadeUp, fadeUpTitle, fadeSoft, viewportRepeat } from './motion/Reveal';
 
 export function HeroSection() {
   const getCallNameInitial = (name: string) => name.trim().split(/\s+/).pop()?.charAt(0).toUpperCase() ?? '';
@@ -16,7 +16,7 @@ export function HeroSection() {
       <motion.div
         initial="hidden"
         whileInView="visible"
-        viewport={viewportOnce}
+        viewport={viewportRepeat}
         variants={fadeImg()}
         className="relative w-full h-[460px] md:h-[520px] overflow-hidden group"
       >
@@ -35,7 +35,7 @@ export function HeroSection() {
         <motion.div
           initial="hidden"
           whileInView="visible"
-          viewport={viewportOnce}
+          viewport={viewportRepeat}
           variants={fadeUpTitle(0.15)}
           className="absolute bottom-8 left-0 right-0 text-center text-white px-4 z-10"
         >
@@ -60,7 +60,7 @@ export function HeroSection() {
         <motion.div
           initial="hidden"
           whileInView="visible"
-          viewport={viewportOnce}
+          viewport={viewportRepeat}
           variants={fadeUpTitle()}
           className="flex items-center justify-center mb-3"
         >
@@ -81,7 +81,7 @@ export function HeroSection() {
         <motion.p
           initial="hidden"
           whileInView="visible"
-          viewport={viewportOnce}
+          viewport={viewportRepeat}
           variants={fadeUp(0.15)}
           className="font-serif-elegant italic text-xs md:text-sm text-[#7A121D]/90 max-w-sm mx-auto leading-relaxed"
         >
@@ -92,7 +92,7 @@ export function HeroSection() {
         <motion.div
           initial="hidden"
           whileInView="visible"
-          viewport={viewportOnce}
+          viewport={viewportRepeat}
           variants={fadeImg(0.1)}
           className="grid grid-cols-4 gap-2 max-w-xs mx-auto mt-6"
         >
@@ -142,7 +142,7 @@ export function HeroSection() {
         </motion.div>
 
         {/* October Calendar & Countdown */}
-        <motion.div initial="hidden" whileInView="visible" viewport={viewportOnce} variants={fadeUp(0.1)}>
+        <motion.div initial="hidden" whileInView="visible" viewport={viewportRepeat} variants={fadeUp(0.1)}>
           <WeddingCountdown />
         </motion.div>
 
@@ -150,7 +150,7 @@ export function HeroSection() {
         <motion.div
           initial="hidden"
           whileInView="visible"
-          viewport={viewportOnce}
+          viewport={viewportRepeat}
           variants={fadeSoft()}
           className="my-4 flex justify-center"
         >
@@ -161,7 +161,7 @@ export function HeroSection() {
         <motion.div
           initial="hidden"
           whileInView="visible"
-          viewport={viewportOnce}
+          viewport={viewportRepeat}
           variants={fadeUp(0.1)}
           className="grid grid-cols-2 gap-4 max-w-sm mx-auto pt-2 text-center border-t border-[#7A121D]/15"
         >

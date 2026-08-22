@@ -3,7 +3,7 @@ import { motion } from 'motion/react';
 import { WEDDING_DATA } from '../data/weddingData';
 import { Sparkles, Info } from 'lucide-react';
 import { BurgundyCallaLily } from './FloralDecor';
-import { fadeUp, fadeUpTitle, viewportOnce } from './motion/Reveal';
+import { fadeUp, fadeUpTitle, viewportRepeat } from './motion/Reveal';
 
 export function DresscodeSection() {
   return (
@@ -12,7 +12,7 @@ export function DresscodeSection() {
       <motion.div
         initial="hidden"
         whileInView="visible"
-        viewport={viewportOnce}
+        viewport={viewportRepeat}
         variants={fadeUpTitle()}
         className="mb-6 relative inline-block"
       >
@@ -31,7 +31,7 @@ export function DresscodeSection() {
             key={idx}
             initial="hidden"
             whileInView="visible"
-            viewport={viewportOnce}
+            viewport={viewportRepeat}
             variants={fadeUp(idx * 0.08)}
             className="flex flex-col items-center group cursor-pointer"
           >
@@ -55,7 +55,7 @@ export function DresscodeSection() {
       <motion.p
         initial="hidden"
         whileInView="visible"
-        viewport={viewportOnce}
+        viewport={viewportRepeat}
         variants={fadeUp(0.2)}
         className="text-xs text-[#6A4D53] italic max-w-xs mx-auto mt-2"
       >

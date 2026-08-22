@@ -3,7 +3,7 @@ import { motion } from 'motion/react';
 import { WEDDING_DATA } from '../data/weddingData';
 import { Heart } from 'lucide-react';
 import { WhitePaperFlower3D } from './FloralDecor';
-import { ParallaxLayer, fadeImg, fadeSoft, fadeUp, fadeUpTitle, viewportOnce } from './motion/Reveal';
+import { ParallaxLayer, fadeImg, fadeSoft, fadeUp, fadeUpTitle, viewportRepeat } from './motion/Reveal';
 
 export function FooterClosingSection({ onOpenGift }: { onOpenGift: () => void }) {
   return (
@@ -12,7 +12,7 @@ export function FooterClosingSection({ onOpenGift }: { onOpenGift: () => void })
       <motion.div
         initial="hidden"
         whileInView="visible"
-        viewport={viewportOnce}
+        viewport={viewportRepeat}
         variants={fadeImg()}
         className="relative w-full h-[400px] md:h-[450px] overflow-hidden group"
       >
@@ -31,7 +31,7 @@ export function FooterClosingSection({ onOpenGift }: { onOpenGift: () => void })
         <motion.div
           initial="hidden"
           whileInView="visible"
-          viewport={viewportOnce}
+          viewport={viewportRepeat}
           variants={fadeUpTitle(0.15)}
           className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center text-white z-10 space-y-4"
         >
@@ -64,7 +64,7 @@ export function FooterClosingSection({ onOpenGift }: { onOpenGift: () => void })
       <motion.div
         initial="hidden"
         whileInView="visible"
-        viewport={viewportOnce}
+        viewport={viewportRepeat}
         variants={fadeUp(0.1)}
         className="text-center pt-8 px-4 text-[#8C7377] text-[11px] space-y-1"
       >

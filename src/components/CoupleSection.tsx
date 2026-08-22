@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { WEDDING_DATA } from '../data/weddingData';
 import { TornPaperTop, TornPaperBottom, WhitePaperFlower3D, BurgundyCallaLily } from './FloralDecor';
-import { ParallaxLayer, fadeImg, fadeUp, fadeUpTitle, fadeSoft, viewportOnce } from './motion/Reveal';
+import { ParallaxLayer, fadeImg, fadeUp, fadeUpTitle, fadeSoft, viewportRepeat } from './motion/Reveal';
 
 export function CoupleSection() {
   return (
@@ -14,7 +14,7 @@ export function CoupleSection() {
         <motion.div
           initial="hidden"
           whileInView="visible"
-          viewport={viewportOnce}
+          viewport={viewportRepeat}
           variants={fadeImg()}
           className="relative w-full h-[280px] md:h-[320px] overflow-hidden group"
         >
@@ -32,7 +32,7 @@ export function CoupleSection() {
           <motion.div
             initial="hidden"
             whileInView="visible"
-            viewport={viewportOnce}
+            viewport={viewportRepeat}
             variants={fadeUpTitle(0.15)}
             className="absolute top-10 left-6 z-10 text-white drop-shadow-md"
           >
@@ -69,7 +69,7 @@ export function CoupleSection() {
         <motion.div
           initial="hidden"
           whileInView="visible"
-          viewport={viewportOnce}
+          viewport={viewportRepeat}
           variants={fadeImg()}
           className="relative w-full h-[280px] md:h-[320px] overflow-hidden group"
         >
@@ -87,7 +87,7 @@ export function CoupleSection() {
           <motion.div
             initial="hidden"
             whileInView="visible"
-            viewport={viewportOnce}
+            viewport={viewportRepeat}
             variants={fadeUpTitle(0.15)}
             className="absolute top-10 right-6 z-10 text-right text-white drop-shadow-md"
           >
@@ -124,7 +124,7 @@ export function CoupleSection() {
       <motion.div
         initial="hidden"
         whileInView="visible"
-        viewport={viewportOnce}
+        viewport={viewportRepeat}
         variants={fadeSoft()}
         className="px-6 py-6 text-center"
       >

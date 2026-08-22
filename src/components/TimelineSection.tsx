@@ -3,7 +3,7 @@ import { motion } from 'motion/react';
 import { Sparkles } from 'lucide-react';
 import { TIMELINE_ITEMS } from '../data/weddingData';
 import { BurgundyCallaLily } from './FloralDecor';
-import { fadeSoft, fadeUp, fadeUpTitle, viewportOnce } from './motion/Reveal';
+import { fadeSoft, fadeUp, fadeUpTitle, viewportRepeat } from './motion/Reveal';
 
 export function TimelineSection() {
   return (
@@ -12,7 +12,7 @@ export function TimelineSection() {
       <motion.div
         initial="hidden"
         whileInView="visible"
-        viewport={viewportOnce}
+        viewport={viewportRepeat}
         variants={fadeSoft(0.2)}
         className="absolute top-4 right-2 pointer-events-none transform rotate-12 opacity-85"
       >
@@ -22,7 +22,7 @@ export function TimelineSection() {
       <motion.div
         initial="hidden"
         whileInView="visible"
-        viewport={viewportOnce}
+        viewport={viewportRepeat}
         variants={fadeUpTitle()}
         className="text-center mb-8"
       >
@@ -56,7 +56,7 @@ export function TimelineSection() {
         <motion.div
           initial="hidden"
           whileInView="visible"
-          viewport={viewportOnce}
+          viewport={viewportRepeat}
           variants={fadeUp()}
           className="relative z-10 flex flex-col items-center text-center mb-12"
         >
@@ -86,7 +86,7 @@ export function TimelineSection() {
         <motion.div
           initial="hidden"
           whileInView="visible"
-          viewport={viewportOnce}
+          viewport={viewportRepeat}
           variants={fadeUp()}
           className="relative z-10 flex flex-col items-end text-right pr-6 mb-12"
         >
@@ -115,7 +115,7 @@ export function TimelineSection() {
         <motion.div
           initial="hidden"
           whileInView="visible"
-          viewport={viewportOnce}
+          viewport={viewportRepeat}
           variants={fadeUp()}
           className="relative z-10 flex flex-col items-start text-left pl-6 mb-12"
         >
@@ -142,7 +142,7 @@ export function TimelineSection() {
         <motion.div
           initial="hidden"
           whileInView="visible"
-          viewport={viewportOnce}
+          viewport={viewportRepeat}
           variants={fadeUp()}
           className="relative z-10 flex flex-col items-center text-center"
         >

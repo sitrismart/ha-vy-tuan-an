@@ -3,7 +3,7 @@ import { motion } from 'motion/react';
 import { PHOTO_GALLERY } from '../data/weddingData';
 import { BurgundyCallaLily, WhitePaperFlower3D } from './FloralDecor';
 import { Heart, Maximize2, X, ChevronLeft, ChevronRight } from 'lucide-react';
-import { fadeImg, fadeSoft, fadeUpTitle, viewportOnce } from './motion/Reveal';
+import { fadeImg, fadeSoft, fadeUpTitle, viewportRepeat } from './motion/Reveal';
 
 export function PhotoMomentsSection() {
   const [selectedPhotoIndex, setSelectedPhotoIndex] = useState<number | null>(null);
@@ -36,7 +36,7 @@ export function PhotoMomentsSection() {
       <motion.div
         initial="hidden"
         whileInView="visible"
-        viewport={viewportOnce}
+        viewport={viewportRepeat}
         variants={fadeSoft(0.2)}
         className="absolute top-10 left-2 pointer-events-none transform -rotate-12 opacity-90"
       >
@@ -47,7 +47,7 @@ export function PhotoMomentsSection() {
       <motion.div
         initial="hidden"
         whileInView="visible"
-        viewport={viewportOnce}
+        viewport={viewportRepeat}
         variants={fadeUpTitle()}
         className="text-center mb-6 relative"
       >
@@ -69,7 +69,7 @@ export function PhotoMomentsSection() {
         <motion.div
           initial="hidden"
           whileInView="visible"
-          viewport={viewportOnce}
+          viewport={viewportRepeat}
           variants={fadeImg(0)}
           onClick={() => openLightbox(0)}
           className="relative col-span-1 rounded-2xl overflow-hidden shadow-md bg-white p-1.5 border border-[#7A121D]/15 cursor-pointer transform hover:-translate-y-1 transition-transform group"
@@ -93,7 +93,7 @@ export function PhotoMomentsSection() {
         <motion.div
           initial="hidden"
           whileInView="visible"
-          viewport={viewportOnce}
+          viewport={viewportRepeat}
           variants={fadeImg(0.1)}
           onClick={() => openLightbox(1)}
           className="relative col-span-1 rounded-2xl overflow-hidden shadow-md bg-white p-1.5 border border-[#7A121D]/15 cursor-pointer transform hover:-translate-y-1 transition-transform group mt-4"
@@ -117,7 +117,7 @@ export function PhotoMomentsSection() {
         <motion.div
           initial="hidden"
           whileInView="visible"
-          viewport={viewportOnce}
+          viewport={viewportRepeat}
           variants={fadeImg(0.2)}
           onClick={() => openLightbox(2)}
           className="relative col-span-1 rounded-2xl overflow-hidden shadow-md bg-white p-1.5 border border-[#7A121D]/15 cursor-pointer transform hover:-translate-y-1 transition-transform group"
@@ -141,7 +141,7 @@ export function PhotoMomentsSection() {
         <motion.div
           initial="hidden"
           whileInView="visible"
-          viewport={viewportOnce}
+          viewport={viewportRepeat}
           variants={fadeImg(0.3)}
           onClick={() => openLightbox(3)}
           className="relative col-span-1 rounded-2xl overflow-hidden shadow-md bg-white p-1.5 border border-[#7A121D]/15 cursor-pointer transform hover:-translate-y-1 transition-transform group -mt-4"

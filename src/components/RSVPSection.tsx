@@ -5,7 +5,7 @@ import { RSVPData, WishMessage } from '../types';
 import confetti from 'canvas-confetti';
 import { Send, Heart, CheckCircle2, MessageSquare, User, Sparkles } from 'lucide-react';
 import { BurgundyCallaLily, WhitePaperFlower3D } from './FloralDecor';
-import { fadeSoft, fadeUp, fadeUpTitle, viewportOnce } from './motion/Reveal';
+import { fadeSoft, fadeUp, fadeUpTitle, viewportRepeat } from './motion/Reveal';
 
 export function RSVPSection() {
   const [formData, setFormData] = useState({
@@ -106,7 +106,7 @@ export function RSVPSection() {
       <motion.div
         initial="hidden"
         whileInView="visible"
-        viewport={viewportOnce}
+        viewport={viewportRepeat}
         variants={fadeSoft(0.2)}
         className="absolute top-2 right-2 pointer-events-none transform rotate-12 opacity-85"
       >
@@ -118,7 +118,7 @@ export function RSVPSection() {
         <motion.div
           initial="hidden"
           whileInView="visible"
-          viewport={viewportOnce}
+          viewport={viewportRepeat}
           variants={fadeUp(0, 24)}
           className="bg-white/90 backdrop-blur-xs rounded-3xl p-6 md:p-8 border border-[#7A121D]/20 shadow-lg relative overflow-hidden"
         >
@@ -249,7 +249,7 @@ export function RSVPSection() {
         <motion.div
           initial="hidden"
           whileInView="visible"
-          viewport={viewportOnce}
+          viewport={viewportRepeat}
           variants={fadeUp(0.1)}
           className="mt-8"
         >
@@ -267,7 +267,7 @@ export function RSVPSection() {
                 key={wish.id}
                 initial="hidden"
                 whileInView="visible"
-                viewport={viewportOnce}
+                viewport={viewportRepeat}
                 variants={fadeUp(Math.min(idx * 0.06, 0.3), 14)}
                 className="bg-white/80 rounded-2xl p-3.5 border border-[#7A121D]/10 shadow-2xs hover:shadow-xs transition-shadow"
               >

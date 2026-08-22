@@ -4,8 +4,9 @@ import { motion, useScroll, useTransform, type Variants } from 'motion/react';
 // Soft cinematic easing shared by every reveal animation in the invitation.
 export const EASE_SOFT: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
-// Trigger once, a little before the element is fully in view, and never re-animate on re-scroll.
-export const viewportOnce = { once: true, amount: 0.22 } as const;
+// Re-triggers every time the element crosses into/out of view, so scrolling back up
+// and back down replays the reveal instead of only ever animating once.
+export const viewportRepeat = { once: false, amount: 0.22 } as const;
 
 /** Photos: fade-in + gentle zoom-out (scale 1.06 -> 1). */
 export const fadeImg = (delay = 0, duration = 1.1): Variants => ({

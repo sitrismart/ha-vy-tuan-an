@@ -3,7 +3,7 @@ import { motion } from 'motion/react';
 import { WEDDING_DATA } from '../data/weddingData';
 import { MapPin, Navigation, CalendarPlus, ExternalLink, Building2 } from 'lucide-react';
 import { BurgundyCallaLily } from './FloralDecor';
-import { fadeUp, fadeUpTitle, viewportOnce } from './motion/Reveal';
+import { fadeUp, fadeUpTitle, viewportRepeat } from './motion/Reveal';
 
 export function VenueSection() {
   return (
@@ -12,7 +12,7 @@ export function VenueSection() {
       <motion.div
         initial="hidden"
         whileInView="visible"
-        viewport={viewportOnce}
+        viewport={viewportRepeat}
         variants={fadeUpTitle()}
         className="mb-6 relative"
       >
@@ -29,7 +29,7 @@ export function VenueSection() {
       <motion.div
         initial="hidden"
         whileInView="visible"
-        viewport={viewportOnce}
+        viewport={viewportRepeat}
         variants={fadeUp(0.1)}
         className="mb-6 space-y-1"
       >
@@ -62,7 +62,7 @@ export function VenueSection() {
       <motion.div
         initial="hidden"
         whileInView="visible"
-        viewport={viewportOnce}
+        viewport={viewportRepeat}
         variants={fadeUp(0.2)}
         className="max-w-sm mx-auto bg-white/80 backdrop-blur-xs rounded-2xl p-5 border border-[#7A121D]/20 shadow-sm space-y-3"
       >
