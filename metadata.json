@@ -1,0 +1,6 @@
+{
+  "name": "Thiệp Cưới Bá Kiên & Quỳnh Anh",
+  "description": "Thiệp mời cưới online sang trọng và hiện đại cho Bá Kiên & Quỳnh Anh với lịch trình, timeline, dresscode, album ảnh, RSVP xác nhận tham dự và bản đồ chỉ đường.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
