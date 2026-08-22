@@ -1,12 +1,11 @@
-export interface RSVPData {
+export interface RSVPRow {
   id: string;
   name: string;
-  wishes: string;
+  wishes: string | null;
   attendance: 'yes' | 'no' | 'maybe';
   companions: string;
-  invitedBy: 'groom' | 'bride' | 'both';
-  createdAt: string;
-  dietary?: string;
+  invited_by: 'groom' | 'bride' | 'both';
+  created_at: string;
 }
 
 export interface WishMessage {
@@ -17,6 +16,14 @@ export interface WishMessage {
   time: string;
   likes: number;
   isLiked?: boolean;
+}
+
+export interface WishRow {
+  id: string;
+  author: string;
+  side: 'groom' | 'bride' | 'both';
+  message: string;
+  created_at: string;
 }
 
 export interface TimelineItem {

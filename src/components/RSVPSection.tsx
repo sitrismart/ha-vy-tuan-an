@@ -1,11 +1,21 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
-import { WEDDING_DATA, INITIAL_WISHES } from '../data/weddingData';
-import { RSVPData, WishMessage } from '../types';
+import { WEDDING_DATA } from '../data/weddingData';
+import { WishMessage, WishRow } from '../types';
 import confetti from 'canvas-confetti';
 import { Send, Heart, CheckCircle2, MessageSquare, User, Sparkles } from 'lucide-react';
 import { BurgundyCallaLily, WhitePaperFlower3D } from './FloralDecor';
 import { fadeSoft, fadeUp, fadeUpTitle, viewportRepeat } from './motion/Reveal';
+import { supabase } from '../lib/supabaseClient';
+
+function formatRelativeTime(iso: string): string {
+  const diffMin = Math.floor((Date.now() - new Date(iso).getTime()) / 60000);
+  if (diffMin < 1) return 'Vừa xong';
+  if (diffMin < 60) return `${diffMin} phút trước`;
+  const diffHour = Math.floor(diffMin / 60);
+  if (diffHour < 24) return `${diffHour} giờ trước`;
+  return `${Math.floor(diffHour / 24)} ngày trước`;
+}
 
 export function RSVPSection() {
   const [formData, setFormData] = useState({
@@ -16,22 +26,66 @@ export function RSVPSection() {
     invitedBy: 'both' as 'groom' | 'bride' | 'both',
   });
 
-  const [wishesList, setWishesList] = useState<WishMessage[]>(() => {
-    const saved = localStorage.getItem('wedding_wishes');
-    if (saved) {
-      try {
-        return JSON.parse(saved);
-      } catch (e) {
-        return INITIAL_WISHES;
-      }
-    }
-    return INITIAL_WISHES;
-  });
-
+  const [wishesList, setWishesList] = useState<WishMessage[]>([]);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // Load the shared guestbook wall from Supabase and keep it live across all visitors.
+  useEffect(() => {
+    let isMounted = true;
+    const likedIds: string[] = JSON.parse(localStorage.getItem('liked_wish_ids') || '[]');
+
+    supabase
+      .from('wishes')
+      .select('id, author, side, message, created_at')
+      .order('created_at', { ascending: false })
+      .limit(50)
+      .then(({ data, error }) => {
+        if (error) console.error('Failed to load wishes from Supabase:', error);
+        if (!isMounted || error || !data) return;
+        const mapped: WishMessage[] = (data as WishRow[]).map((row) => ({
+          id: row.id,
+          author: row.author,
+          side: row.side,
+          message: row.message,
+          time: formatRelativeTime(row.created_at),
+          likes: likedIds.includes(row.id) ? 1 : 0,
+          isLiked: likedIds.includes(row.id),
+        }));
+        setWishesList(mapped);
+      });
+
+    const channel = supabase
+      .channel('wishes-realtime')
+      .on(
+        'postgres_changes',
+        { event: 'INSERT', schema: 'public', table: 'wishes' },
+        (payload) => {
+          const row = payload.new as WishRow;
+          setWishesList((prev) => {
+            if (prev.some((w) => w.id === row.id)) return prev;
+            const newWish: WishMessage = {
+              id: row.id,
+              author: row.author,
+              side: row.side,
+              message: row.message,
+              time: formatRelativeTime(row.created_at),
+              likes: 0,
+              isLiked: false,
+            };
+            return [newWish, ...prev];
+          });
+        }
+      )
+      .subscribe();
+
+    return () => {
+      isMounted = false;
+      supabase.removeChannel(channel);
+    };
+  }, []);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name.trim()) return;
 
@@ -49,39 +103,29 @@ export function RSVPSection() {
       // Ignored
     }
 
-    setTimeout(() => {
-      // Create new wish entry
-      const newWish: WishMessage = {
-        id: 'w_' + Date.now(),
-        author: formData.name.trim(),
-        side: formData.invitedBy,
-        message: formData.wishes.trim() || 'Chúc hai bạn trăm năm hạnh phúc!',
-        time: 'Vừa xong',
-        likes: 1,
-        isLiked: true,
-      };
+    const name = formData.name.trim();
+    const message = formData.wishes.trim() || 'Chúc hai bạn trăm năm hạnh phúc!';
 
-      const updatedWishes = [newWish, ...wishesList];
-      setWishesList(updatedWishes);
-      localStorage.setItem('wedding_wishes', JSON.stringify(updatedWishes));
-
-      // Save RSVP to storage
-      const rsvpEntry: RSVPData = {
-        id: 'rsvp_' + Date.now(),
-        name: formData.name,
-        wishes: formData.wishes,
+    const [rsvpResult, wishResult] = await Promise.all([
+      supabase.from('rsvps').insert({
+        name,
+        wishes: formData.wishes.trim(),
         attendance: formData.attendance,
         companions: formData.companions,
-        invitedBy: formData.invitedBy,
-        createdAt: new Date().toISOString(),
-      };
+        invited_by: formData.invitedBy,
+      }),
+      supabase.from('wishes').insert({
+        author: name,
+        side: formData.invitedBy,
+        message,
+      }),
+    ]);
 
-      const existingRSVPs = JSON.parse(localStorage.getItem('wedding_rsvps') || '[]');
-      localStorage.setItem('wedding_rsvps', JSON.stringify([rsvpEntry, ...existingRSVPs]));
+    if (rsvpResult.error) console.error('Failed to save RSVP to Supabase:', rsvpResult.error);
+    if (wishResult.error) console.error('Failed to save wish to Supabase:', wishResult.error);
 
-      setIsSubmitting(false);
-      setIsSubmitted(true);
-    }, 600);
+    setIsSubmitting(false);
+    setIsSubmitted(true);
   };
 
   const handleLike = (id: string) => {
@@ -98,6 +142,12 @@ export function RSVPSection() {
         return w;
       })
     );
+
+    const likedIds: string[] = JSON.parse(localStorage.getItem('liked_wish_ids') || '[]');
+    const nextLikedIds = likedIds.includes(id)
+      ? likedIds.filter((likedId) => likedId !== id)
+      : [...likedIds, id];
+    localStorage.setItem('liked_wish_ids', JSON.stringify(nextLikedIds));
   };
 
   return (
@@ -262,7 +312,12 @@ export function RSVPSection() {
           </div>
 
           <div className="space-y-3 max-h-[360px] overflow-y-auto pr-1">
-            {wishesList.map((wish, idx) => (
+            {wishesList.length === 0 ? (
+              <p className="text-center text-xs text-[#8C7377] italic py-6">
+                Chưa có lời chúc nào. Hãy là người đầu tiên gửi lời chúc nhé!
+              </p>
+            ) : (
+              wishesList.map((wish, idx) => (
               <motion.div
                 key={wish.id}
                 initial="hidden"
@@ -303,7 +358,8 @@ export function RSVPSection() {
                   "{wish.message}"
                 </p>
               </motion.div>
-            ))}
+              ))
+            )}
           </div>
         </motion.div>
 
