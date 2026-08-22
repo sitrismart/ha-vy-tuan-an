@@ -1,7 +1,9 @@
 import React from 'react';
+import { motion } from 'motion/react';
 import { WEDDING_DATA } from '../data/weddingData';
 import { WeddingCountdown } from './WeddingCountdown';
 import { BurgundyCallaLily } from './FloralDecor';
+import { ParallaxLayer, fadeImg, fadeUp, fadeUpTitle, fadeSoft, viewportOnce } from './motion/Reveal';
 
 export function HeroSection() {
   const getCallNameInitial = (name: string) => name.trim().split(/\s+/).pop()?.charAt(0).toUpperCase() ?? '';
@@ -11,18 +13,32 @@ export function HeroSection() {
   return (
     <div className="w-full flex flex-col items-center">
       {/* Top Main Cover Image (SAVE THE DATE) */}
-      <div className="relative w-full h-[460px] md:h-[520px] overflow-hidden group">
-        <img
-          src={WEDDING_DATA.images.heroCover}
-          alt={`${WEDDING_DATA.groom.shortName} & ${WEDDING_DATA.bride.shortName}`}
-          className="w-full h-full object-cover object-[center_35%] transform group-hover:scale-105 transition-transform duration-700 filter brightness-90"
-        />
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewportOnce}
+        variants={fadeImg()}
+        className="relative w-full h-[460px] md:h-[520px] overflow-hidden group"
+      >
+        <ParallaxLayer strength={16}>
+          <img
+            src={WEDDING_DATA.images.heroCover}
+            alt={`${WEDDING_DATA.groom.shortName} & ${WEDDING_DATA.bride.shortName}`}
+            className="w-full h-full object-cover object-[center_35%] transform group-hover:scale-105 transition-transform duration-700 filter brightness-90"
+          />
+        </ParallaxLayer>
 
         {/* Gradient overlays */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent pointer-events-none" />
 
         {/* Hero Title & Typography */}
-        <div className="absolute bottom-8 left-0 right-0 text-center text-white px-4 z-10">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+          variants={fadeUpTitle(0.15)}
+          className="absolute bottom-8 left-0 right-0 text-center text-white px-4 z-10"
+        >
           <span className="font-serif-elegant tracking-[0.3em] text-sm md:text-base uppercase opacity-90 block mb-1">
             SAVE
           </span>
@@ -35,13 +51,19 @@ export function HeroSection() {
           <p className="font-display text-xs md:text-sm tracking-[0.25em] text-[#EADBC8] uppercase font-semibold mt-2">
             {WEDDING_DATA.groom.shortName} & {WEDDING_DATA.bride.shortName}
           </p>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
       {/* Monogram A&K and Quote Section */}
       <div className="w-full py-8 px-6 text-center relative">
         {/* Monogram Emblem */}
-        <div className="flex items-center justify-center mb-3">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+          variants={fadeUpTitle()}
+          className="flex items-center justify-center mb-3"
+        >
           <div className="relative flex items-center justify-center">
             <span className="font-serif-elegant text-5xl md:text-6xl text-[#7A121D] font-light italic">
               {brideInitial}
@@ -53,15 +75,27 @@ export function HeroSection() {
               {groomInitial}
             </span>
           </div>
-        </div>
+        </motion.div>
 
         {/* English Romantic Quote */}
-        <p className="font-serif-elegant italic text-xs md:text-sm text-[#7A121D]/90 max-w-sm mx-auto leading-relaxed">
+        <motion.p
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+          variants={fadeUp(0.15)}
+          className="font-serif-elegant italic text-xs md:text-sm text-[#7A121D]/90 max-w-sm mx-auto leading-relaxed"
+        >
           "{WEDDING_DATA.quotes.quoteEnglish}"
-        </p>
+        </motion.p>
 
         {/* 4 Mini Polaroids Row with Day / Month / Year Numbers */}
-        <div className="grid grid-cols-4 gap-2 max-w-xs mx-auto mt-6">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+          variants={fadeImg(0.1)}
+          className="grid grid-cols-4 gap-2 max-w-xs mx-auto mt-6"
+        >
           <div className="relative aspect-[3/4] rounded-lg overflow-hidden border border-white shadow-sm bg-white p-0.5">
             <img
               src={WEDDING_DATA.images.miniPolaroids[0]}
@@ -105,18 +139,32 @@ export function HeroSection() {
               {String(WEDDING_DATA.event.year).slice(-2)}
             </span>
           </div>
-        </div>
+        </motion.div>
 
         {/* October Calendar & Countdown */}
-        <WeddingCountdown />
+        <motion.div initial="hidden" whileInView="visible" viewport={viewportOnce} variants={fadeUp(0.1)}>
+          <WeddingCountdown />
+        </motion.div>
 
         {/* Calla Lily Illustration Accent */}
-        <div className="my-4 flex justify-center">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+          variants={fadeSoft()}
+          className="my-4 flex justify-center"
+        >
           <BurgundyCallaLily size={60} />
-        </div>
+        </motion.div>
 
         {/* Nhà Gái & Nhà Trai Parents Information */}
-        <div className="grid grid-cols-2 gap-4 max-w-sm mx-auto pt-2 text-center border-t border-[#7A121D]/15">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+          variants={fadeUp(0.1)}
+          className="grid grid-cols-2 gap-4 max-w-sm mx-auto pt-2 text-center border-t border-[#7A121D]/15"
+        >
           {/* Nhà Gái */}
           <div className="space-y-0.5">
             <span className="font-display text-[11px] font-bold tracking-widest text-[#7A121D] uppercase">
@@ -148,7 +196,7 @@ export function HeroSection() {
               {WEDDING_DATA.groom.hometown}
             </span>
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   );

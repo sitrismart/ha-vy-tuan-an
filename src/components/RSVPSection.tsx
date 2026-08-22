@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { motion } from 'motion/react';
 import { WEDDING_DATA, INITIAL_WISHES } from '../data/weddingData';
 import { RSVPData, WishMessage } from '../types';
 import confetti from 'canvas-confetti';
 import { Send, Heart, CheckCircle2, MessageSquare, User, Sparkles } from 'lucide-react';
 import { BurgundyCallaLily, WhitePaperFlower3D } from './FloralDecor';
+import { fadeSoft, fadeUp, fadeUpTitle, viewportOnce } from './motion/Reveal';
 
 export function RSVPSection() {
   const [formData, setFormData] = useState({
@@ -101,14 +103,26 @@ export function RSVPSection() {
   return (
     <section id="rsvp-section" className="relative w-full py-10 px-4">
       {/* Decorative Calla Lily */}
-      <div className="absolute top-2 right-2 pointer-events-none transform rotate-12 opacity-85">
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewportOnce}
+        variants={fadeSoft(0.2)}
+        className="absolute top-2 right-2 pointer-events-none transform rotate-12 opacity-85"
+      >
         <BurgundyCallaLily size={65} />
-      </div>
+      </motion.div>
 
       <div className="max-w-md mx-auto">
         {/* RSVP Card with refined paper styling */}
-        <div className="bg-white/90 backdrop-blur-xs rounded-3xl p-6 md:p-8 border border-[#7A121D]/20 shadow-lg relative overflow-hidden">
-          
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+          variants={fadeUp(0, 24)}
+          className="bg-white/90 backdrop-blur-xs rounded-3xl p-6 md:p-8 border border-[#7A121D]/20 shadow-lg relative overflow-hidden"
+        >
+
           <div className="text-center mb-6">
             <h3 className="font-script text-4xl md:text-5xl text-[#7A121D]">
               Xác Nhận Tham Dự
@@ -229,10 +243,16 @@ export function RSVPSection() {
             </form>
           )}
 
-        </div>
+        </motion.div>
 
         {/* Sổ Lưu Bút Online - Guestbook Display */}
-        <div className="mt-8">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+          variants={fadeUp(0.1)}
+          className="mt-8"
+        >
           <div className="flex items-center justify-between mb-4 px-2">
             <h4 className="font-display text-sm font-bold tracking-wider uppercase text-[#7A121D] flex items-center gap-2">
               <MessageSquare className="w-4 h-4" />
@@ -242,9 +262,13 @@ export function RSVPSection() {
           </div>
 
           <div className="space-y-3 max-h-[360px] overflow-y-auto pr-1">
-            {wishesList.map((wish) => (
-              <div
+            {wishesList.map((wish, idx) => (
+              <motion.div
                 key={wish.id}
+                initial="hidden"
+                whileInView="visible"
+                viewport={viewportOnce}
+                variants={fadeUp(Math.min(idx * 0.06, 0.3), 14)}
                 className="bg-white/80 rounded-2xl p-3.5 border border-[#7A121D]/10 shadow-2xs hover:shadow-xs transition-shadow"
               >
                 <div className="flex items-center justify-between mb-1.5">
@@ -278,10 +302,10 @@ export function RSVPSection() {
                 <p className="text-xs text-[#55383C] pl-9 italic leading-relaxed">
                   "{wish.message}"
                 </p>
-              </div>
+              </motion.div>
             ))}
           </div>
-        </div>
+        </motion.div>
 
       </div>
     </section>

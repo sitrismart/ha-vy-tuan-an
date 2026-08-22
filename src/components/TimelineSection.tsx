@@ -1,24 +1,38 @@
 import React from 'react';
+import { motion } from 'motion/react';
 import { Sparkles } from 'lucide-react';
 import { TIMELINE_ITEMS } from '../data/weddingData';
 import { BurgundyCallaLily } from './FloralDecor';
+import { fadeSoft, fadeUp, fadeUpTitle, viewportOnce } from './motion/Reveal';
 
 export function TimelineSection() {
   return (
     <section className="relative w-full py-10 px-4 overflow-hidden">
       {/* Decorative Calla Lilies around title */}
-      <div className="absolute top-4 right-2 pointer-events-none transform rotate-12 opacity-85">
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewportOnce}
+        variants={fadeSoft(0.2)}
+        className="absolute top-4 right-2 pointer-events-none transform rotate-12 opacity-85"
+      >
         <BurgundyCallaLily size={65} />
-      </div>
+      </motion.div>
 
-      <div className="text-center mb-8">
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewportOnce}
+        variants={fadeUpTitle()}
+        className="text-center mb-8"
+      >
         <h3 className="font-script text-5xl md:text-6xl text-[#7A121D] tracking-wide">
           Timeline
         </h3>
         <p className="text-[11px] font-semibold tracking-widest text-[#7A121D]/70 uppercase mt-1">
           Chương Trình Tiệc Cưới
         </p>
-      </div>
+      </motion.div>
 
       {/* Interactive S-Curve Timeline Graphic matching user's photo */}
       <div className="relative w-full max-w-[340px] mx-auto min-h-[460px] py-4">
@@ -39,7 +53,13 @@ export function TimelineSection() {
         </svg>
 
         {/* Timeline Node 1: 14:00 - Rước Dâu */}
-        <div className="relative z-10 flex flex-col items-center text-center mb-12">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+          variants={fadeUp()}
+          className="relative z-10 flex flex-col items-center text-center mb-12"
+        >
           <span className="font-display text-sm font-bold text-[#7A121D] bg-[#FAF6F0] px-2 py-0.5 rounded-full border border-[#7A121D]/20 shadow-xs">
             14:00
           </span>
@@ -60,10 +80,16 @@ export function TimelineSection() {
               <path d="M9 13l3 3 3-3" />
             </svg>
           </div>
-        </div>
+        </motion.div>
 
         {/* Timeline Node 2: 17:00 - Lễ Thành Hôn (Aligned Right) */}
-        <div className="relative z-10 flex flex-col items-end text-right pr-6 mb-12">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+          variants={fadeUp()}
+          className="relative z-10 flex flex-col items-end text-right pr-6 mb-12"
+        >
           <div className="flex flex-col items-center">
             <span className="font-display text-sm font-bold text-[#7A121D] bg-[#FAF6F0] px-2 py-0.5 rounded-full border border-[#7A121D]/20 shadow-xs">
               17:00
@@ -83,10 +109,16 @@ export function TimelineSection() {
               </svg>
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Timeline Node 3: 17:30 - Khai Tiệc (Aligned Left) */}
-        <div className="relative z-10 flex flex-col items-start text-left pl-6 mb-12">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+          variants={fadeUp()}
+          className="relative z-10 flex flex-col items-start text-left pl-6 mb-12"
+        >
           <div className="flex flex-col items-center">
             <span className="font-display text-sm font-bold text-[#7A121D] bg-[#FAF6F0] px-2 py-0.5 rounded-full border border-[#7A121D]/20 shadow-xs">
               17:30
@@ -104,10 +136,16 @@ export function TimelineSection() {
               </svg>
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Timeline Node 4: 19:00 - Âm Nhạc (Centered) */}
-        <div className="relative z-10 flex flex-col items-center text-center">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+          variants={fadeUp()}
+          className="relative z-10 flex flex-col items-center text-center"
+        >
           <span className="font-display text-sm font-bold text-[#7A121D] bg-[#FAF6F0] px-2 py-0.5 rounded-full border border-[#7A121D]/20 shadow-xs">
             19:00
           </span>
@@ -125,7 +163,7 @@ export function TimelineSection() {
               <circle cx="18" cy="16" r="3" />
             </svg>
           </div>
-        </div>
+        </motion.div>
 
       </div>
     </section>

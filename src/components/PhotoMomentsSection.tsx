@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { motion } from 'motion/react';
 import { PHOTO_GALLERY } from '../data/weddingData';
 import { BurgundyCallaLily, WhitePaperFlower3D } from './FloralDecor';
 import { Heart, Maximize2, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { fadeImg, fadeSoft, fadeUpTitle, viewportOnce } from './motion/Reveal';
 
 export function PhotoMomentsSection() {
   const [selectedPhotoIndex, setSelectedPhotoIndex] = useState<number | null>(null);
@@ -31,12 +33,24 @@ export function PhotoMomentsSection() {
   return (
     <section className="relative w-full py-10 px-4">
       {/* Decorative Calla Lily on side */}
-      <div className="absolute top-10 left-2 pointer-events-none transform -rotate-12 opacity-90">
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewportOnce}
+        variants={fadeSoft(0.2)}
+        className="absolute top-10 left-2 pointer-events-none transform -rotate-12 opacity-90"
+      >
         <BurgundyCallaLily size={70} />
-      </div>
+      </motion.div>
 
       {/* Header text layout matching original mockup */}
-      <div className="text-center mb-6 relative">
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewportOnce}
+        variants={fadeUpTitle()}
+        className="text-center mb-6 relative"
+      >
         <span className="font-script text-2xl text-[#7A121D] block">
           Forever & Love you
         </span>
@@ -46,13 +60,17 @@ export function PhotoMomentsSection() {
         <p className="font-serif-elegant italic text-xs md:text-sm text-[#6A4D53]">
           A collection of memories we've shared together
         </p>
-      </div>
+      </motion.div>
 
       {/* Artistic Collage Layout */}
       <div className="max-w-md mx-auto grid grid-cols-2 gap-3 sm:gap-4 items-start">
-        
+
         {/* Item 1 - Tall Top Left */}
-        <div
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+          variants={fadeImg(0)}
           onClick={() => openLightbox(0)}
           className="relative col-span-1 rounded-2xl overflow-hidden shadow-md bg-white p-1.5 border border-[#7A121D]/15 cursor-pointer transform hover:-translate-y-1 transition-transform group"
         >
@@ -69,10 +87,14 @@ export function PhotoMomentsSection() {
           <p className="text-[10px] font-medium text-center text-[#55383C] mt-1.5 line-clamp-1 italic">
             Forever with you
           </p>
-        </div>
+        </motion.div>
 
         {/* Item 2 - Square Top Right */}
-        <div
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+          variants={fadeImg(0.1)}
           onClick={() => openLightbox(1)}
           className="relative col-span-1 rounded-2xl overflow-hidden shadow-md bg-white p-1.5 border border-[#7A121D]/15 cursor-pointer transform hover:-translate-y-1 transition-transform group mt-4"
         >
@@ -89,10 +111,14 @@ export function PhotoMomentsSection() {
           <p className="text-[10px] font-medium text-center text-[#55383C] mt-1.5 line-clamp-1 italic">
             Nắm tay em đi qua bão giông
           </p>
-        </div>
+        </motion.div>
 
         {/* Item 3 - Square Bottom Left */}
-        <div
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+          variants={fadeImg(0.2)}
           onClick={() => openLightbox(2)}
           className="relative col-span-1 rounded-2xl overflow-hidden shadow-md bg-white p-1.5 border border-[#7A121D]/15 cursor-pointer transform hover:-translate-y-1 transition-transform group"
         >
@@ -109,10 +135,14 @@ export function PhotoMomentsSection() {
           <p className="text-[10px] font-medium text-center text-[#55383C] mt-1.5 line-clamp-1 italic">
             Ánh mắt trao nhau
           </p>
-        </div>
+        </motion.div>
 
         {/* Item 4 - Tall Bottom Right */}
-        <div
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+          variants={fadeImg(0.3)}
           onClick={() => openLightbox(3)}
           className="relative col-span-1 rounded-2xl overflow-hidden shadow-md bg-white p-1.5 border border-[#7A121D]/15 cursor-pointer transform hover:-translate-y-1 transition-transform group -mt-4"
         >
@@ -129,7 +159,7 @@ export function PhotoMomentsSection() {
           <p className="text-[10px] font-medium text-center text-[#55383C] mt-1.5 line-clamp-1 italic">
             Hạnh phúc giản đơn
           </p>
-        </div>
+        </motion.div>
 
       </div>
 

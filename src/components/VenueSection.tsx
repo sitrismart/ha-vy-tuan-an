@@ -1,13 +1,21 @@
 import React from 'react';
+import { motion } from 'motion/react';
 import { WEDDING_DATA } from '../data/weddingData';
 import { MapPin, Navigation, CalendarPlus, ExternalLink, Building2 } from 'lucide-react';
 import { BurgundyCallaLily } from './FloralDecor';
+import { fadeUp, fadeUpTitle, viewportOnce } from './motion/Reveal';
 
 export function VenueSection() {
   return (
     <section className="relative w-full py-10 px-4 text-center">
       {/* Script Title */}
-      <div className="mb-6 relative">
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewportOnce}
+        variants={fadeUpTitle()}
+        className="mb-6 relative"
+      >
         <h3 className="font-display text-2xl md:text-3xl font-bold tracking-widest text-[#7A121D] uppercase">
           {WEDDING_DATA.groom.shortName}
         </h3>
@@ -15,10 +23,16 @@ export function VenueSection() {
         <h3 className="font-display text-2xl md:text-3xl font-bold tracking-widest text-[#7A121D] uppercase">
           {WEDDING_DATA.bride.shortName}
         </h3>
-      </div>
+      </motion.div>
 
       {/* Time & Solar / Lunar Date display */}
-      <div className="mb-6 space-y-1">
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewportOnce}
+        variants={fadeUp(0.1)}
+        className="mb-6 space-y-1"
+      >
         <p className="font-display text-sm font-semibold tracking-wider text-[#7A121D] uppercase">
           {WEDDING_DATA.event.timeDisplay}
         </p>
@@ -42,10 +56,16 @@ export function VenueSection() {
         <p className="text-xs text-[#6A4D53] italic">
           ({WEDDING_DATA.event.lunarDateDisplay})
         </p>
-      </div>
+      </motion.div>
 
       {/* Venue Address Card */}
-      <div className="max-w-sm mx-auto bg-white/80 backdrop-blur-xs rounded-2xl p-5 border border-[#7A121D]/20 shadow-sm space-y-3">
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewportOnce}
+        variants={fadeUp(0.2)}
+        className="max-w-sm mx-auto bg-white/80 backdrop-blur-xs rounded-2xl p-5 border border-[#7A121D]/20 shadow-sm space-y-3"
+      >
         <div className="flex items-center justify-center gap-2 text-[#7A121D]">
           <Building2 className="w-5 h-5" />
           <span className="text-[11px] font-bold tracking-widest uppercase">
@@ -85,7 +105,7 @@ export function VenueSection() {
             <span>LƯU VÀO LỊCH</span>
           </a>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }

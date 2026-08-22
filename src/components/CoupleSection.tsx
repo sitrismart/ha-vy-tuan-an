@@ -1,6 +1,8 @@
 import React from 'react';
+import { motion } from 'motion/react';
 import { WEDDING_DATA } from '../data/weddingData';
 import { TornPaperTop, TornPaperBottom, WhitePaperFlower3D, BurgundyCallaLily } from './FloralDecor';
+import { ParallaxLayer, fadeImg, fadeUp, fadeUpTitle, fadeSoft, viewportOnce } from './motion/Reveal';
 
 export function CoupleSection() {
   return (
@@ -9,17 +11,31 @@ export function CoupleSection() {
       <div className="relative w-full bg-[#1F3144] py-2 overflow-hidden shadow-inner">
 
         {/* BRIDE PHOTO STRIP (Cô dâu) with Torn Edges */}
-        <div className="relative w-full h-[280px] md:h-[320px] overflow-hidden group">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+          variants={fadeImg()}
+          className="relative w-full h-[280px] md:h-[320px] overflow-hidden group"
+        >
           {/* Background Photo of Bride */}
-          <img
-            src={WEDDING_DATA.images.bridePortrait}
-            alt={`Cô dâu ${WEDDING_DATA.bride.shortName}`}
-            className="w-full h-full object-cover object-[center_30%] transform group-hover:scale-105 transition-transform duration-700 filter brightness-95"
-          />
+          <ParallaxLayer strength={10}>
+            <img
+              src={WEDDING_DATA.images.bridePortrait}
+              alt={`Cô dâu ${WEDDING_DATA.bride.shortName}`}
+              className="w-full h-full object-cover object-[center_30%] transform group-hover:scale-105 transition-transform duration-700 filter brightness-95"
+            />
+          </ParallaxLayer>
           <div className="absolute inset-0 bg-gradient-to-r from-[#172635]/65 via-[#172635]/25 to-transparent pointer-events-none" />
 
           {/* Bride Name & Info in Luxury Serif Typography */}
-          <div className="absolute top-10 left-6 z-10 text-white drop-shadow-md">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportOnce}
+            variants={fadeUpTitle(0.15)}
+            className="absolute top-10 left-6 z-10 text-white drop-shadow-md"
+          >
             <span className="block font-script text-3xl md:text-4xl text-[#F4D9DF] -mb-1">
               Cô dâu
             </span>
@@ -29,7 +45,7 @@ export function CoupleSection() {
             <p className="text-xs md:text-sm tracking-widest text-[#F4D9DF]/90 font-medium mt-0.5">
               {WEDDING_DATA.bride.birthday}
             </p>
-          </div>
+          </motion.div>
 
           {/* Top Torn Paper Edge of Bride section */}
           <div className="absolute top-0 left-0 right-0 z-20">
@@ -40,7 +56,7 @@ export function CoupleSection() {
           <div className="absolute -bottom-4 left-4 z-30 transform -rotate-12 animate-float">
             <WhitePaperFlower3D size={44} />
           </div>
-        </div>
+        </motion.div>
 
         {/* MIDDLE TORN DIVIDER WITH 3D FLOWERS */}
         <div className="relative w-full h-8 z-20 flex items-center justify-center -my-3 pointer-events-none">
@@ -50,17 +66,31 @@ export function CoupleSection() {
         </div>
 
         {/* GROOM PHOTO STRIP (Chú rể) with Torn Edges */}
-        <div className="relative w-full h-[280px] md:h-[320px] overflow-hidden group">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportOnce}
+          variants={fadeImg()}
+          className="relative w-full h-[280px] md:h-[320px] overflow-hidden group"
+        >
           {/* Background Photo of Groom */}
-          <img
-            src={WEDDING_DATA.images.groomPortrait}
-            alt={`Chú rể ${WEDDING_DATA.groom.shortName}`}
-            className="w-full h-full object-cover object-[center_25%] transform group-hover:scale-105 transition-transform duration-700 filter brightness-95"
-          />
+          <ParallaxLayer strength={10}>
+            <img
+              src={WEDDING_DATA.images.groomPortrait}
+              alt={`Chú rể ${WEDDING_DATA.groom.shortName}`}
+              className="w-full h-full object-cover object-[center_25%] transform group-hover:scale-105 transition-transform duration-700 filter brightness-95"
+            />
+          </ParallaxLayer>
           <div className="absolute inset-0 bg-gradient-to-l from-[#172635]/65 via-[#172635]/25 to-transparent pointer-events-none" />
 
           {/* Groom Name & Info in Luxury Serif Typography */}
-          <div className="absolute top-10 right-6 z-10 text-right text-white drop-shadow-md">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportOnce}
+            variants={fadeUpTitle(0.15)}
+            className="absolute top-10 right-6 z-10 text-right text-white drop-shadow-md"
+          >
             <span className="block font-script text-3xl md:text-4xl text-[#F4D9DF] -mb-1">
               Chú rể
             </span>
@@ -70,7 +100,7 @@ export function CoupleSection() {
             <p className="text-xs md:text-sm tracking-widest text-[#F4D9DF]/90 font-medium mt-0.5">
               {WEDDING_DATA.groom.birthday}
             </p>
-          </div>
+          </motion.div>
 
           {/* Big 3D White Flower Cluster at Bottom Right (Exact design from user's image) */}
           <div className="absolute -bottom-5 right-5 z-30 flex items-center gap-0 pointer-events-none">
@@ -86,16 +116,22 @@ export function CoupleSection() {
           <div className="absolute bottom-0 left-0 right-0 z-20">
             <TornPaperBottom color="#FAF6F0" />
           </div>
-        </div>
+        </motion.div>
 
       </div>
 
       {/* Love Quote Below the Torn Photos */}
-      <div className="px-6 py-6 text-center">
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewportOnce}
+        variants={fadeSoft()}
+        className="px-6 py-6 text-center"
+      >
         <p className="font-serif-elegant italic text-base md:text-lg text-[#55383C] leading-relaxed max-w-md mx-auto">
           "{WEDDING_DATA.quotes.quoteVietnamese}"
         </p>
-      </div>
+      </motion.div>
     </section>
   );
 }
