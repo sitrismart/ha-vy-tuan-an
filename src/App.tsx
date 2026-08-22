@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { HeroSection } from './components/HeroSection';
 import { CoupleSection } from './components/CoupleSection';
 import { VenueSection } from './components/VenueSection';
@@ -10,6 +10,7 @@ import { FooterClosingSection } from './components/FooterClosingSection';
 import { AudioPlayer } from './components/AudioPlayer';
 import { GiftBoxModal } from './components/GiftBoxModal';
 import { WEDDING_DATA } from './data/weddingData';
+import { supabase } from './lib/supabaseClient';
 import { 
   Heart, 
   MapPin, 
@@ -24,6 +25,22 @@ import {
 export default function App() {
   const [isGiftModalOpen, setIsGiftModalOpen] = useState(false);
   const [isCopiedLink, setIsCopiedLink] = useState(false);
+  const [guestName, setGuestName] = useState<string | undefined>(undefined);
+
+  // Personalized invite links (e.g. /Vo-Van-Nam) prefill the RSVP form with the guest's name.
+  useEffect(() => {
+    const slug = window.location.pathname.replace(/^\//, '');
+    if (!slug || slug === 'admin') return;
+
+    supabase
+      .from('invite_links')
+      .select('name')
+      .eq('slug', slug)
+      .maybeSingle()
+      .then(({ data }) => {
+        if (data) setGuestName(data.name);
+      });
+  }, []);
 
   const scrollToSection = (sectionId: string) => {
     const el = document.getElementById(sectionId);
@@ -109,7 +126,7 @@ export default function App() {
         <PhotoMomentsSection />
 
         {/* 7. RSVP FORM & GUESTBOOK SECTION */}
-        <RSVPSection />
+        <RSVPSection prefillName={guestName} />
 
         {/* 8. FOOTER CLOSING SECTION: Thank you, Ending Quote */}
         <FooterClosingSection onOpenGift={() => setIsGiftModalOpen(true)} />

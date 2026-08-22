@@ -66,13 +66,13 @@ export function HeroSection() {
         >
           <div className="relative flex items-center justify-center">
             <span className="font-serif-elegant text-5xl md:text-6xl text-[#7A121D] font-light italic">
-              {brideInitial}
+              {groomInitial}
             </span>
             <span className="font-script text-3xl text-[#8E6E53] -mx-1.5 z-10">
               &
             </span>
             <span className="font-serif-elegant text-5xl md:text-6xl text-[#7A121D] font-light italic">
-              {groomInitial}
+              {brideInitial}
             </span>
           </div>
         </motion.div>

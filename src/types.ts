@@ -26,6 +26,13 @@ export interface WishRow {
   created_at: string;
 }
 
+export interface InviteLinkRow {
+  id: string;
+  name: string;
+  slug: string;
+  created_at: string;
+}
+
 export interface TimelineItem {
   time: string;
   title: string;

@@ -17,7 +17,7 @@ function formatRelativeTime(iso: string): string {
   return `${Math.floor(diffHour / 24)} ngày trước`;
 }
 
-export function RSVPSection() {
+export function RSVPSection({ prefillName }: { prefillName?: string }) {
   const [formData, setFormData] = useState({
     name: '',
     wishes: '',
@@ -29,6 +29,13 @@ export function RSVPSection() {
   const [wishesList, setWishesList] = useState<WishMessage[]>([]);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Prefill the guest's name when they open a personalized invite link.
+  useEffect(() => {
+    if (prefillName) {
+      setFormData((prev) => (prev.name ? prev : { ...prev, name: prefillName }));
+    }
+  }, [prefillName]);
 
   // Load the shared guestbook wall from Supabase and keep it live across all visitors.
   useEffect(() => {
