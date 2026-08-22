@@ -77,7 +77,7 @@ export const WEDDING_DATA = {
   ],
   music: {
     title: 'một đời x người tốt nhất cho em',
-    url: 'www.nhaccuatui.com/song/7x3OOueZ3757',
+    url: '../../assets/audio/mot-doi-x-nguoi-tot-nhat-cho-em.mp3',
   },
 };
 

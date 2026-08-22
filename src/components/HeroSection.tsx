@@ -4,8 +4,9 @@ import { WeddingCountdown } from './WeddingCountdown';
 import { BurgundyCallaLily } from './FloralDecor';
 
 export function HeroSection() {
-  const brideInitial = WEDDING_DATA.bride.shortName.charAt(0).toUpperCase() || 'A';
-  const groomInitial = WEDDING_DATA.groom.shortName.charAt(0).toUpperCase() || 'K';
+  const getCallNameInitial = (name: string) => name.trim().split(/\s+/).pop()?.charAt(0).toUpperCase() ?? '';
+  const brideInitial = getCallNameInitial(WEDDING_DATA.bride.shortName) || 'V';
+  const groomInitial = getCallNameInitial(WEDDING_DATA.groom.shortName) || 'A';
 
   return (
     <div className="w-full flex flex-col items-center">
