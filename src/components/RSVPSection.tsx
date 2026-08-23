@@ -291,10 +291,9 @@ export function RSVPSection({ prefillName }: { prefillName?: string }) {
                 {isSubmitting ? (
                   <span>ĐANG GỬI...</span>
                 ) : (
-                  <>
+                  <div>
                     <span>XÁC NHẬN</span>
-                    <Sparkles className="w-4 h-4" />
-                  </>
+                  </div>
                 )}
               </button>
             </form>

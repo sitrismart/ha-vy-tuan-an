@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { WEDDING_DATA } from '../data/weddingData';
-import { MapPin, Navigation, CalendarPlus, ExternalLink, Building2 } from 'lucide-react';
+import { MapPin, Navigation, ExternalLink, Building2 } from 'lucide-react';
 import { BurgundyCallaLily } from './FloralDecor';
 import { fadeUp, fadeUpTitle, viewportRepeat } from './motion/Reveal';
 
@@ -90,8 +90,8 @@ export function VenueSection() {
           {WEDDING_DATA.event.venueAddress}
         </p>
 
-        {/* Action Buttons: Xem chỉ đường & Thêm vào lịch */}
-        <div className="pt-2 flex flex-col sm:flex-row gap-2.5 justify-center">
+        {/* Action Button: Xem chỉ đường */}
+        <div className="pt-2 flex justify-center">
           <a
             href={WEDDING_DATA.event.mapLink}
             target="_blank"
@@ -100,16 +100,6 @@ export function VenueSection() {
           >
             <MapPin className="w-3.5 h-3.5" />
             <span>XEM CHỈ ĐƯỜNG</span>
-          </a>
-
-          <a
-            href={WEDDING_DATA.event.googleCalendarUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-1.5 py-2.5 px-4 rounded-xl bg-white hover:bg-[#FAF6F0] text-[#7A121D] border border-[#7A121D]/30 text-xs font-semibold tracking-wider uppercase shadow-xs transition-colors"
-          >
-            <CalendarPlus className="w-3.5 h-3.5" />
-            <span>LƯU VÀO LỊCH</span>
           </a>
         </div>
       </motion.div>

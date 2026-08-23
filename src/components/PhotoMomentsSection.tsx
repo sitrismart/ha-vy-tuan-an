@@ -5,14 +5,25 @@ import { BurgundyCallaLily } from './FloralDecor';
 import { Maximize2, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { fadeImg, fadeSoft, fadeUpTitle, viewportRepeat } from './motion/Reveal';
 
+// Edge-to-edge slide: the entering photo pushes in from the direction of
+// travel while the leaving one is pushed fully out the other side, so the
+// two always tile the frame with zero gap and the dark backdrop never shows.
+const slideVariants = {
+  enter: (direction: number) => ({ x: direction > 0 ? '100%' : '-100%' }),
+  center: { x: 0 },
+  exit: (direction: number) => ({ x: direction > 0 ? '-100%' : '100%' }),
+};
+
 export function PhotoMomentsSection() {
   const [selectedPhotoIndex, setSelectedPhotoIndex] = useState<number | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [direction, setDirection] = useState(1);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
   useEffect(() => {
     if (!isAutoPlaying) return;
     const timer = setInterval(() => {
+      setDirection(1);
       setCurrentIndex((prev) => (prev < PHOTO_GALLERY.length - 1 ? prev + 1 : 0));
     }, 3500); // changes every 3.5 seconds
     return () => clearInterval(timer);
@@ -42,11 +53,13 @@ export function PhotoMomentsSection() {
 
   const prevSlide = () => {
     setIsAutoPlaying(false);
+    setDirection(-1);
     setCurrentIndex((prev) => (prev > 0 ? prev - 1 : PHOTO_GALLERY.length - 1));
   };
 
   const nextSlide = () => {
     setIsAutoPlaying(false);
+    setDirection(1);
     setCurrentIndex((prev) => (prev < PHOTO_GALLERY.length - 1 ? prev + 1 : 0));
   };
 
@@ -91,17 +104,19 @@ export function PhotoMomentsSection() {
         className="max-w-md mx-auto relative rounded-2xl shadow-xl bg-white p-2 border border-[#7A121D]/15"
       >
         <div className="relative aspect-[3/4] w-full overflow-hidden rounded-xl bg-[#1A0B0D]">
-          <AnimatePresence initial={false}>
+          <AnimatePresence initial={false} custom={direction}>
             <motion.img
               key={currentIndex}
               src={PHOTO_GALLERY[currentIndex].url}
               alt="Khoảnh khắc"
-              initial={{ opacity: 0, x: 100 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -100 }}
+              custom={direction}
+              variants={slideVariants}
+              initial="enter"
+              animate="center"
+              exit="exit"
               transition={{ duration: 0.5, ease: 'easeInOut' }}
               className="absolute inset-0 w-full h-full object-cover cursor-pointer"
-              style={{ imageRendering: 'high-quality' as any, WebkitBackfaceVisibility: 'hidden', transform: 'translateZ(0)' }}
+              style={{ imageRendering: 'high-quality' as any, WebkitBackfaceVisibility: 'hidden' }}
               onClick={() => openLightbox(currentIndex)}
             />
           </AnimatePresence>
@@ -140,6 +155,7 @@ export function PhotoMomentsSection() {
               key={idx}
               onClick={() => {
                 setIsAutoPlaying(false);
+                setDirection(idx > currentIndex ? 1 : -1);
                 setCurrentIndex(idx);
               }}
               className={`h-1.5 rounded-full transition-all ${
