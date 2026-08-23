@@ -3,7 +3,7 @@ import { motion } from 'motion/react';
 import { WEDDING_DATA } from '../data/weddingData';
 import { WishMessage, WishRow } from '../types';
 import confetti from 'canvas-confetti';
-import { Send, Heart, CheckCircle2, MessageSquare, User, Sparkles } from 'lucide-react';
+import { Send, Heart, CheckCircle2, MessageSquare, User, Sparkles, ChevronDown } from 'lucide-react';
 import { BurgundyCallaLily, WhitePaperFlower3D } from './FloralDecor';
 import { fadeSoft, fadeUp, fadeUpTitle, viewportRepeat } from './motion/Reveal';
 import { supabase } from '../lib/supabaseClient';
@@ -243,43 +243,46 @@ export function RSVPSection({ prefillName }: { prefillName?: string }) {
               </div>
 
               {/* Xác nhận tham dự? */}
-              <div>
+              <div className="relative">
                 <select
                   value={formData.attendance}
                   onChange={(e) => setFormData({ ...formData, attendance: e.target.value as any })}
-                  className="w-full px-4 py-2.5 rounded-xl bg-[#FAF6F0] border border-[#7A121D]/20 text-xs text-[#2D1217] focus:outline-none focus:ring-2 focus:ring-[#7A121D]/40 transition-all cursor-pointer"
+                  className="w-full px-4 pr-9 py-2.5 rounded-xl bg-[#FAF6F0] border border-[#7A121D]/20 text-xs text-[#2D1217] focus:outline-none focus:ring-2 focus:ring-[#7A121D]/40 transition-all cursor-pointer appearance-none"
                 >
                   <option value="yes">Xác nhận tham dự: Chắc chắn tôi sẽ đến</option>
                   <option value="maybe">Xác nhận tham dự: Chưa chắc chắn (sẽ báo sau)</option>
                   <option value="no">Xác nhận tham dự: Rất tiếc không thể đến</option>
                 </select>
+                <ChevronDown className="w-4 h-4 text-[#7A121D]/60 absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
               </div>
 
               {/* Bạn có tham dự cùng ai khác không? */}
-              <div>
+              <div className="relative">
                 <select
                   value={formData.companions}
                   onChange={(e) => setFormData({ ...formData, companions: e.target.value })}
-                  className="w-full px-4 py-2.5 rounded-xl bg-[#FAF6F0] border border-[#7A121D]/20 text-xs text-[#2D1217] focus:outline-none focus:ring-2 focus:ring-[#7A121D]/40 transition-all cursor-pointer"
+                  className="w-full px-4 pr-9 py-2.5 rounded-xl bg-[#FAF6F0] border border-[#7A121D]/20 text-xs text-[#2D1217] focus:outline-none focus:ring-2 focus:ring-[#7A121D]/40 transition-all cursor-pointer appearance-none"
                 >
                   <option value="0">Bạn có tham dự cùng ai không: Đi một mình</option>
                   <option value="1">Tham dự cùng 1 người (+1 người)</option>
                   <option value="2">Tham dự cùng 2 người (+2 người)</option>
                   <option value="family">Tham dự cùng cả gia đình</option>
                 </select>
+                <ChevronDown className="w-4 h-4 text-[#7A121D]/60 absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
               </div>
 
               {/* Bạn là khách mời của ai? */}
-              <div>
+              <div className="relative">
                 <select
                   value={formData.invitedBy}
                   onChange={(e) => setFormData({ ...formData, invitedBy: e.target.value as any })}
-                  className="w-full px-4 py-2.5 rounded-xl bg-[#FAF6F0] border border-[#7A121D]/20 text-xs text-[#2D1217] focus:outline-none focus:ring-2 focus:ring-[#7A121D]/40 transition-all cursor-pointer"
+                  className="w-full px-4 pr-9 py-2.5 rounded-xl bg-[#FAF6F0] border border-[#7A121D]/20 text-xs text-[#2D1217] focus:outline-none focus:ring-2 focus:ring-[#7A121D]/40 transition-all cursor-pointer appearance-none"
                 >
                   <option value="both">Bạn là khách mời của ai: Bạn chung cả hai</option>
                   <option value="groom">Bạn là khách mời của: Chú Rể (Tuấn An)</option>
                   <option value="bride">Bạn là khách mời của: Cô Dâu (Hạ Vy)</option>
                 </select>
+                <ChevronDown className="w-4 h-4 text-[#7A121D]/60 absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
               </div>
 
               {/* Button XÁC NHẬN */}
