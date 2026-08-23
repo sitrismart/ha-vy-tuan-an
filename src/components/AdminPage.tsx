@@ -80,11 +80,50 @@ function RSVPDetailModal({ row, onClose }: { row: RSVPRow; onClose: () => void }
   );
 }
 
+function ConfirmDeleteModal({
+  message,
+  onConfirm,
+  onCancel,
+}: {
+  message: string;
+  onConfirm: () => void;
+  onCancel: () => void;
+}) {
+  return (
+    <div
+      className="fixed inset-0 bg-black/40 flex items-center justify-center p-4 z-50"
+      onClick={onCancel}
+    >
+      <div
+        className="bg-white rounded-2xl p-4 max-w-xs w-full border border-[#7A121D]/20 shadow-lg space-y-4"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <p className="text-sm text-[#2D1217]">{message}</p>
+        <div className="flex justify-end gap-2">
+          <button
+            onClick={onCancel}
+            className="px-4 py-1.5 rounded-full border border-[#7A121D]/30 text-[#7A121D] text-xs font-semibold hover:bg-[#7A121D]/10 transition-colors"
+          >
+            Hủy
+          </button>
+          <button
+            onClick={onConfirm}
+            className="px-4 py-1.5 rounded-full bg-red-600 hover:bg-red-700 text-white text-xs font-semibold transition-colors"
+          >
+            Xóa
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function RSVPListTab() {
   const [rows, setRows] = useState<RSVPRow[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [selectedRow, setSelectedRow] = useState<RSVPRow | null>(null);
+  const [pendingDelete, setPendingDelete] = useState<RSVPRow | null>(null);
 
   useEffect(() => {
     supabase
@@ -98,6 +137,13 @@ function RSVPListTab() {
       });
   }, []);
 
+  const handleDelete = async (id: string) => {
+    const { error } = await supabase.from('rsvps').delete().eq('id', id);
+    if (error) setError(error.message);
+    else setRows((prev) => prev.filter((row) => row.id !== id));
+    setPendingDelete(null);
+  };
+
   if (isLoading) return <p className="text-sm text-[#8C7377] py-6 text-center">Đang tải...</p>;
   if (error) return <p className="text-sm text-red-600 py-6 text-center">Lỗi tải dữ liệu: {error}</p>;
   if (rows.length === 0) return <p className="text-sm text-[#8C7377] py-6 text-center">Chưa có ai điền form.</p>;
@@ -110,21 +156,29 @@ function RSVPListTab() {
             <tr className="text-left text-[#7A121D] border-b border-[#7A121D]/20">
               <th className="py-2 pr-4 font-semibold">Tên</th>
               <th className="py-2 pr-4 font-semibold">Xác nhận</th>
-              <th className="py-2 pr-4 font-semibold" />
+              <th className="py-2 font-semibold" />
             </tr>
           </thead>
           <tbody>
             {rows.map((row) => (
               <tr key={row.id} className="border-b border-[#7A121D]/10">
-                <td className="py-2 pr-4 max-w-35 truncate" title={row.name}>{row.name}</td>
+                <td className="py-2 pr-4 max-w-25 truncate" title={row.name}>{row.name}</td>
                 <td className="py-2 pr-4 whitespace-nowrap">{ATTENDANCE_LABEL[row.attendance]}</td>
-                <td className="py-2 pr-4 whitespace-nowrap">
-                  <button
-                    onClick={() => setSelectedRow(row)}
-                    className="px-3 py-1 rounded-full border border-[#7A121D]/30 text-[#7A121D] text-xs font-semibold hover:bg-[#7A121D]/10 transition-colors"
-                  >
-                    Xem thêm
-                  </button>
+                <td className="py-2 whitespace-nowrap">
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => setSelectedRow(row)}
+                      className="px-3 py-1 rounded-full border border-[#7A121D]/30 text-[#7A121D] text-xs font-semibold hover:bg-[#7A121D]/10 transition-colors"
+                    >
+                      Xem thêm
+                    </button>
+                    <button
+                      onClick={() => setPendingDelete(row)}
+                      className="px-3 py-1 rounded-full border border-red-600/30 text-red-600 text-xs font-semibold hover:bg-red-600/10 transition-colors"
+                    >
+                      Xóa
+                    </button>
+                  </div>
                 </td>
               </tr>
             ))}
@@ -133,6 +187,13 @@ function RSVPListTab() {
       </div>
 
       {selectedRow && <RSVPDetailModal row={selectedRow} onClose={() => setSelectedRow(null)} />}
+      {pendingDelete && (
+        <ConfirmDeleteModal
+          message={`Xóa xác nhận tham dự của "${pendingDelete.name}"? Hành động này không thể hoàn tác.`}
+          onCancel={() => setPendingDelete(null)}
+          onConfirm={() => handleDelete(pendingDelete.id)}
+        />
+      )}
     </>
   );
 }
@@ -144,6 +205,7 @@ function OverviewTab() {
   const [isCreating, setIsCreating] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [copiedSlug, setCopiedSlug] = useState<string | null>(null);
+  const [pendingDelete, setPendingDelete] = useState<InviteLinkRow | null>(null);
 
   useEffect(() => {
     supabase
@@ -201,6 +263,7 @@ function OverviewTab() {
     const { error } = await supabase.from('invite_links').delete().eq('id', id);
     if (error) setError(error.message);
     else setLinks((prev) => prev.filter((link) => link.id !== id));
+    setPendingDelete(null);
   };
 
   return (
@@ -235,7 +298,7 @@ function OverviewTab() {
               <tr className="text-left text-[#7A121D] border-b border-[#7A121D]/20">
                 <th className="py-2 pr-4 font-semibold">Tên</th>
                 <th className="py-2 pr-4 font-semibold">Link</th>
-                <th className="py-2 pr-4 font-semibold" />
+                <th className="py-2 font-semibold" />
               </tr>
             </thead>
             <tbody>
@@ -245,16 +308,16 @@ function OverviewTab() {
                   <td className="py-2 pr-4 text-[#8C7377] break-all">
                     {window.location.origin}/{link.slug}
                   </td>
-                  <td className="py-2 pr-4">
+                  <td className="py-2">
                     <div className="flex gap-2">
                       <button
                         onClick={() => handleCopy(link.slug)}
                         className="px-3 py-1 rounded-full border border-[#7A121D]/30 text-[#7A121D] text-xs font-semibold hover:bg-[#7A121D]/10 transition-colors whitespace-nowrap"
                       >
-                        {copiedSlug === link.slug ? 'Đã copy!' : 'Copy'}
+                        {copiedSlug === link.slug ? 'Đã copy' : 'Copy'}
                       </button>
                       <button
-                        onClick={() => handleDelete(link.id)}
+                        onClick={() => setPendingDelete(link)}
                         className="px-3 py-1 rounded-full border border-red-600/30 text-red-600 text-xs font-semibold hover:bg-red-600/10 transition-colors whitespace-nowrap"
                       >
                         Xóa
@@ -266,6 +329,14 @@ function OverviewTab() {
             </tbody>
           </table>
         </div>
+      )}
+
+      {pendingDelete && (
+        <ConfirmDeleteModal
+          message={`Xóa link mời của "${pendingDelete.name}"? Hành động này không thể hoàn tác.`}
+          onCancel={() => setPendingDelete(null)}
+          onConfirm={() => handleDelete(pendingDelete.id)}
+        />
       )}
     </div>
   );

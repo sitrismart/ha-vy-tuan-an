@@ -205,7 +205,7 @@ export function RSVPSection({ prefillName }: { prefillName?: string }) {
                 onClick={() => {
                   setIsSubmitted(false);
                   setFormData({
-                    name: '',
+                    name: prefillName ?? '',
                     wishes: '',
                     attendance: 'yes',
                     companions: '0',
