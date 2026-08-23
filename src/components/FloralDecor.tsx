@@ -7,10 +7,10 @@ export function TornPaperTop({ className = "", color = "#FAF6F0" }: { className?
       <svg
         viewBox="0 0 1200 60"
         preserveAspectRatio="none"
-        className="w-full h-8 md:h-12 block drop-shadow-sm"
+        className="w-full h-8 md:h-10 block drop-shadow-sm"
         style={{ fill: color }}
       >
-        <path d="M0,0 L0,38 Q30,12 60,34 T120,28 T180,45 T240,22 T300,42 T360,18 T420,38 T480,24 T540,46 T600,20 T660,40 T720,25 T780,45 T840,16 T900,40 T960,22 T1020,44 T1080,26 T1140,42 T1200,30 L1200,0 Z" />
+        <path d="M0,0 L0,30 Q150,50 300,35 T600,25 T900,40 T1200,30 L1200,0 Z" />
       </svg>
     </div>
   );
@@ -23,10 +23,10 @@ export function TornPaperBottom({ className = "", color = "#FAF6F0" }: { classNa
       <svg
         viewBox="0 0 1200 60"
         preserveAspectRatio="none"
-        className="w-full h-8 md:h-12 block drop-shadow-sm"
+        className="w-full h-8 md:h-10 block drop-shadow-sm"
         style={{ fill: color }}
       >
-        <path d="M0,60 L0,22 Q30,48 60,26 T120,32 T180,15 T240,38 T300,18 T360,42 T420,22 T480,36 T540,14 T600,40 T660,20 T720,35 T780,15 T840,44 T900,20 T960,38 T1020,16 T1080,34 T1140,18 T1200,30 L1200,60 Z" />
+        <path d="M0,60 L0,30 Q150,10 300,25 T600,35 T900,20 T1200,30 L1200,60 Z" />
       </svg>
     </div>
   );
@@ -54,25 +54,25 @@ export function WhitePaperFlower3D({ size = 48, className = "", style }: { size?
 
         {/* Petal Top */}
         <path
-          d="M 50 50 C 35 30, 30 10, 50 5 C 70 10, 65 30, 50 50 Z"
+          d="M 50 50 C 25 35, 30 5, 50 5 C 70 5, 75 35, 50 50 Z"
           fill="url(#paperWhite)"
           filter="url(#petalShadow)"
         />
         {/* Petal Right */}
         <path
-          d="M 50 50 C 70 35, 90 30, 95 50 C 90 70, 70 65, 50 50 Z"
+          d="M 50 50 C 65 25, 95 30, 95 50 C 95 70, 65 75, 50 50 Z"
           fill="url(#paperWhite)"
           filter="url(#petalShadow)"
         />
         {/* Petal Bottom */}
         <path
-          d="M 50 50 C 65 70, 70 90, 50 95 C 30 90, 35 70, 50 50 Z"
+          d="M 50 50 C 75 65, 70 95, 50 95 C 30 95, 25 65, 50 50 Z"
           fill="url(#paperWhite)"
           filter="url(#petalShadow)"
         />
         {/* Petal Left */}
         <path
-          d="M 50 50 C 30 65, 10 70, 5 50 C 10 30, 30 35, 50 50 Z"
+          d="M 50 50 C 35 75, 5 70, 5 50 C 5 30, 35 25, 50 50 Z"
           fill="url(#paperWhite)"
           filter="url(#petalShadow)"
         />
@@ -92,51 +92,154 @@ export function BurgundyCallaLily({ size = 70, className = "", style }: { size?:
       className={`relative inline-block select-none pointer-events-none drop-shadow-md ${className}`}
       style={{ width: size, height: size * 1.3, ...style }}
     >
-      <svg viewBox="0 0 100 130" className="w-full h-full">
+      <svg viewBox="0 0 120 160" className="w-full h-full overflow-visible">
         <defs>
-          <linearGradient id="burgundyStem" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#4A6B4D" />
-            <stop offset="100%" stopColor="#2D4430" />
+          <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="1" dy="3" stdDeviation="4" floodColor="#000000" floodOpacity="0.2" />
+          </filter>
+          
+          <linearGradient id="stemGreen" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#7c8e65" />
+            <stop offset="50%" stopColor="#556b2f" />
+            <stop offset="100%" stopColor="#3d4d22" />
           </linearGradient>
-          <linearGradient id="burgundyFlower" x1="0%" y1="0%" x2="80%" y2="100%">
-            <stop offset="0%" stopColor="#9E1B2A" />
-            <stop offset="40%" stopColor="#7A121D" />
-            <stop offset="85%" stopColor="#4D0B12" />
-            <stop offset="100%" stopColor="#2E0409" />
+          
+          <linearGradient id="leafGreen" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#637c41" />
+            <stop offset="100%" stopColor="#34451c" />
           </linearGradient>
-          <linearGradient id="spadixGold" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#FFEAA7" />
-            <stop offset="100%" stopColor="#E17055" />
+
+          <linearGradient id="petalDeep" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#9e1b2a" />
+            <stop offset="40%" stopColor="#630412" />
+            <stop offset="100%" stopColor="#2e0409" />
+          </linearGradient>
+
+          <linearGradient id="petalLight" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#e32636" />
+            <stop offset="50%" stopColor="#a31425" />
+            <stop offset="100%" stopColor="#4a0414" />
+          </linearGradient>
+
+          <linearGradient id="spadixGold" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#d4af37" />
+            <stop offset="50%" stopColor="#ffd700" />
+            <stop offset="100%" stopColor="#b8860b" />
           </linearGradient>
         </defs>
 
-        {/* Stem */}
+        {/* --- Background Elements (Leaves & Back Stems) --- */}
+        {/* Left Leaf */}
         <path
-          d="M 45 65 Q 40 95, 25 125"
+          d="M 55 120 C 35 110, 15 80, 5 60 C 15 75, 30 100, 55 120 Z"
+          fill="url(#leafGreen)"
+          opacity="0.8"
+          filter="url(#softShadow)"
+        />
+        {/* Right Leaf */}
+        <path
+          d="M 65 110 C 85 90, 110 50, 115 25 C 100 50, 80 85, 65 110 Z"
+          fill="url(#leafGreen)"
+          opacity="0.7"
+          filter="url(#softShadow)"
+        />
+
+        {/* Stem 1 (Small bud on right) */}
+        <path
+          d="M 90 45 C 80 70, 70 110, 60 140"
           fill="none"
-          stroke="url(#burgundyStem)"
-          strokeWidth="3.5"
+          stroke="url(#stemGreen)"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+        />
+        {/* Small Bud Petal */}
+        <path
+          d="M 90 45 C 85 35, 90 20, 100 15 C 105 30, 95 40, 90 45 Z"
+          fill="url(#petalDeep)"
+          filter="url(#softShadow)"
+        />
+
+        {/* Stem 2 (Main Flower) */}
+        <path
+          d="M 50 85 C 45 110, 48 135, 55 155"
+          fill="none"
+          stroke="url(#stemGreen)"
+          strokeWidth="4"
+          strokeLinecap="round"
+          filter="url(#softShadow)"
+        />
+
+        {/* Stem 3 (Left leaning flower) */}
+        <path
+          d="M 25 65 C 35 90, 45 120, 55 155"
+          fill="none"
+          stroke="url(#stemGreen)"
+          strokeWidth="3"
           strokeLinecap="round"
         />
 
-        {/* Calla Lily Petal Shape */}
-        <path
-          d="M 45 65 C 20 50, 15 20, 50 10 C 85 10, 80 45, 55 65 C 48 70, 46 70, 45 65 Z"
-          fill="url(#burgundyFlower)"
-        />
-        {/* Inner Curved Lip */}
-        <path
-          d="M 50 10 C 65 25, 60 50, 45 65 C 38 45, 42 22, 50 10 Z"
-          fill="#5D0B14"
-          opacity="0.8"
-        />
-        {/* Yellow Spadix Inside */}
-        <path
-          d="M 50 35 Q 52 48, 48 55"
-          stroke="url(#spadixGold)"
-          strokeWidth="4"
-          strokeLinecap="round"
-        />
+        {/* --- Left Leaning Flower --- */}
+        <g filter="url(#softShadow)">
+          {/* Back spathe */}
+          <path
+            d="M 25 65 C 10 55, 0 30, 15 15 C 35 5, 45 35, 30 50 C 27 55, 26 60, 25 65 Z"
+            fill="url(#petalDeep)"
+          />
+          {/* Spadix */}
+          <path
+            d="M 18 35 C 20 45, 22 55, 25 65"
+            stroke="url(#spadixGold)"
+            strokeWidth="3"
+            strokeLinecap="round"
+          />
+          {/* Front wrapping spathe */}
+          <path
+            d="M 15 15 C 5 25, 10 50, 25 65 C 28 50, 25 25, 15 15 Z"
+            fill="url(#petalLight)"
+            opacity="0.9"
+          />
+        </g>
+
+        {/* --- Main Center Flower --- */}
+        <g filter="url(#softShadow)">
+          {/* Sweeping back petal */}
+          <path
+            d="M 50 85 C 25 65, 20 25, 45 0 C 85 -10, 95 40, 65 70 C 58 78, 52 82, 50 85 Z"
+            fill="url(#petalDeep)"
+          />
+          
+          {/* Dark inner cavity */}
+          <path
+            d="M 35 15 C 45 30, 50 50, 55 75 C 65 55, 70 30, 35 15 Z"
+            fill="#1c0006"
+            opacity="0.8"
+          />
+
+          {/* Large Golden Spadix */}
+          <path
+            d="M 45 25 C 48 40, 50 60, 50 80"
+            stroke="url(#spadixGold)"
+            strokeWidth="5"
+            strokeLinecap="round"
+          />
+
+          {/* Front elegant wrapping fold */}
+          <path
+            d="M 35 15 C 20 35, 25 70, 50 85 C 55 65, 50 35, 35 15 Z"
+            fill="url(#petalLight)"
+            opacity="0.95"
+          />
+
+          {/* Subtle edge highlight for 3D realism */}
+          <path
+            d="M 35 15 C 30 30, 32 55, 48 75"
+            fill="none"
+            stroke="#ff8c9d"
+            strokeWidth="1"
+            opacity="0.4"
+            strokeLinecap="round"
+          />
+        </g>
       </svg>
     </div>
   );

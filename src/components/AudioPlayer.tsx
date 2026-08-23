@@ -24,10 +24,21 @@ export function AudioPlayer() {
     window.addEventListener('touchstart', handleFirstInteraction, { once: true });
     window.addEventListener('scroll', handleFirstInteraction, { once: true });
 
+    // Handle visibility change (e.g. closing in-app browser like Messenger)
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'hidden' && audioRef.current) {
+        audioRef.current.pause();
+        setIsPlaying(false);
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
     return () => {
       window.removeEventListener('click', handleFirstInteraction);
       window.removeEventListener('touchstart', handleFirstInteraction);
       window.removeEventListener('scroll', handleFirstInteraction);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
   }, [hasInteracted]);
 

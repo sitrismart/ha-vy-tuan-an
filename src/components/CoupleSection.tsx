@@ -16,7 +16,7 @@ export function CoupleSection() {
           whileInView="visible"
           viewport={viewportRepeat}
           variants={fadeImg()}
-          className="relative w-full h-[280px] md:h-[320px] overflow-hidden group"
+          className="relative w-full h-[380px] md:h-[420px] overflow-hidden group"
         >
           {/* Background Photo of Bride */}
           <ParallaxLayer strength={10}>
@@ -71,14 +71,14 @@ export function CoupleSection() {
           whileInView="visible"
           viewport={viewportRepeat}
           variants={fadeImg()}
-          className="relative w-full h-[280px] md:h-[320px] overflow-hidden group"
+          className="relative w-full h-[380px] md:h-[420px] overflow-hidden group"
         >
           {/* Background Photo of Groom */}
           <ParallaxLayer strength={10}>
             <img
               src={WEDDING_DATA.images.groomPortrait}
               alt={`Chú rể ${WEDDING_DATA.groom.shortName}`}
-              className="w-full h-full object-cover object-[center_25%] transform group-hover:scale-105 transition-transform duration-700 filter brightness-95"
+              className="w-full h-full object-cover object-top transform group-hover:scale-105 transition-transform duration-700 filter brightness-95"
             />
           </ParallaxLayer>
           <div className="absolute inset-0 bg-gradient-to-l from-[#172635]/65 via-[#172635]/25 to-transparent pointer-events-none" />

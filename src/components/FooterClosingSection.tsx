@@ -5,7 +5,7 @@ import { Heart } from 'lucide-react';
 import { WhitePaperFlower3D } from './FloralDecor';
 import { ParallaxLayer, fadeImg, fadeSoft, fadeUp, fadeUpTitle, viewportRepeat } from './motion/Reveal';
 
-export function FooterClosingSection({ onOpenGift }: { onOpenGift: () => void }) {
+export function FooterClosingSection() {
   return (
     <footer className="relative w-full pt-6 pb-24 overflow-hidden">
       {/* Couple Ending Photo with Romantic Message */}
@@ -42,16 +42,6 @@ export function FooterClosingSection({ onOpenGift }: { onOpenGift: () => void })
           <h3 className="font-script text-5xl md:text-6xl text-white tracking-wide drop-shadow-lg">
             Thank you!
           </h3>
-
-          <div className="pt-2">
-            <button
-              onClick={onOpenGift}
-              className="inline-flex items-center gap-2 py-2 px-5 rounded-full bg-white/20 hover:bg-white/30 backdrop-blur-sm border border-white/40 text-xs font-semibold tracking-wider text-white uppercase transition-all shadow-md active:scale-95"
-            >
-              <Heart className="w-3.5 h-3.5 fill-red-400 text-red-400" />
-              <span>GỬI MỪNG CƯỚI</span>
-            </button>
-          </div>
         </motion.div>
 
         {/* 3D Paper Flower accent on bottom corner */}

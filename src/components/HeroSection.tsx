@@ -102,7 +102,7 @@ export function HeroSection() {
               alt="Mini 1"
               className="w-full h-full object-cover"
             />
-            <span className="absolute inset-0 flex items-center justify-center font-display text-xl md:text-2xl font-bold text-white/90 drop-shadow-md">
+            <span className="absolute inset-0 flex items-end justify-center pb-1 font-display text-xl md:text-2xl font-bold text-white/90 drop-shadow-md">
               {String(WEDDING_DATA.event.day).padStart(2, '0')}
             </span>
           </div>
@@ -113,7 +113,7 @@ export function HeroSection() {
               alt="Mini 2"
               className="w-full h-full object-cover"
             />
-            <span className="absolute inset-0 flex items-center justify-center font-serif-elegant text-lg md:text-xl font-bold text-white/90 drop-shadow-md">
+            <span className="absolute inset-0 flex items-end justify-center pb-2 font-serif-elegant text-lg md:text-xl font-bold text-white/90 drop-shadow-md">
               /
             </span>
           </div>
@@ -124,7 +124,7 @@ export function HeroSection() {
               alt="Mini 3"
               className="w-full h-full object-cover"
             />
-            <span className="absolute inset-0 flex items-center justify-center font-display text-xl md:text-2xl font-bold text-white/90 drop-shadow-md">
+            <span className="absolute inset-0 flex items-end justify-center pb-1 font-display text-xl md:text-2xl font-bold text-white/90 drop-shadow-md">
               {String(WEDDING_DATA.event.month).padStart(2, '0')}
             </span>
           </div>
@@ -135,7 +135,7 @@ export function HeroSection() {
               alt="Mini 4"
               className="w-full h-full object-cover"
             />
-            <span className="absolute inset-0 flex items-center justify-center font-display text-xl md:text-2xl font-bold text-white/90 drop-shadow-md">
+            <span className="absolute inset-0 flex items-end justify-center pb-1 font-display text-xl md:text-2xl font-bold text-white/90 drop-shadow-md">
               {String(WEDDING_DATA.event.year).slice(-2)}
             </span>
           </div>

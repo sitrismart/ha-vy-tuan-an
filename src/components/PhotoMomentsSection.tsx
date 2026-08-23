@@ -1,12 +1,22 @@
-import React, { useState } from 'react';
-import { motion } from 'motion/react';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 import { PHOTO_GALLERY } from '../data/weddingData';
-import { BurgundyCallaLily, WhitePaperFlower3D } from './FloralDecor';
-import { Heart, Maximize2, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { BurgundyCallaLily } from './FloralDecor';
+import { Maximize2, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { fadeImg, fadeSoft, fadeUpTitle, viewportRepeat } from './motion/Reveal';
 
 export function PhotoMomentsSection() {
   const [selectedPhotoIndex, setSelectedPhotoIndex] = useState<number | null>(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+
+  useEffect(() => {
+    if (!isAutoPlaying) return;
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev < PHOTO_GALLERY.length - 1 ? prev + 1 : 0));
+    }, 3500); // changes every 3.5 seconds
+    return () => clearInterval(timer);
+  }, [isAutoPlaying]);
 
   const openLightbox = (index: number) => {
     setSelectedPhotoIndex(index);
@@ -28,6 +38,16 @@ export function PhotoMomentsSection() {
     if (selectedPhotoIndex !== null) {
       setSelectedPhotoIndex((prev) => (prev! < PHOTO_GALLERY.length - 1 ? prev! + 1 : 0));
     }
+  };
+
+  const prevSlide = () => {
+    setIsAutoPlaying(false);
+    setCurrentIndex((prev) => (prev > 0 ? prev - 1 : PHOTO_GALLERY.length - 1));
+  };
+
+  const nextSlide = () => {
+    setIsAutoPlaying(false);
+    setCurrentIndex((prev) => (prev < PHOTO_GALLERY.length - 1 ? prev + 1 : 0));
   };
 
   return (
@@ -62,106 +82,73 @@ export function PhotoMomentsSection() {
         </p>
       </motion.div>
 
-      {/* Artistic Collage Layout */}
-      <div className="max-w-md mx-auto grid grid-cols-2 gap-3 sm:gap-4 items-start">
-
-        {/* Item 1 - Tall Top Left */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewportRepeat}
-          variants={fadeImg(0)}
-          onClick={() => openLightbox(0)}
-          className="relative col-span-1 rounded-2xl overflow-hidden shadow-md bg-white p-1.5 border border-[#7A121D]/15 cursor-pointer transform hover:-translate-y-1 transition-transform group"
-        >
-          <div className="relative aspect-[3/4] overflow-hidden rounded-xl">
-            <img
-              src={PHOTO_GALLERY[0].url}
-              alt="Khoảnh khắc ngọt ngào"
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+      {/* Carousel Layout */}
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewportRepeat}
+        variants={fadeImg()}
+        className="max-w-md mx-auto relative rounded-2xl shadow-xl bg-white p-2 border border-[#7A121D]/15"
+      >
+        <div className="relative aspect-[3/4] w-full overflow-hidden rounded-xl bg-[#1A0B0D]">
+          <AnimatePresence initial={false}>
+            <motion.img
+              key={currentIndex}
+              src={PHOTO_GALLERY[currentIndex].url}
+              alt="Khoảnh khắc"
+              initial={{ opacity: 0, x: 100 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -100 }}
+              transition={{ duration: 0.5, ease: 'easeInOut' }}
+              className="absolute inset-0 w-full h-full object-cover cursor-pointer"
+              style={{ imageRendering: 'high-quality' as any, WebkitBackfaceVisibility: 'hidden', transform: 'translateZ(0)' }}
+              onClick={() => openLightbox(currentIndex)}
             />
-            <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white">
-              <Maximize2 className="w-5 h-5 drop-shadow" />
-            </div>
+          </AnimatePresence>
+          
+          {/* Caption overlay */}
+          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4 pt-12 pointer-events-none">
+            <p className="text-white text-sm md:text-base font-serif-elegant italic text-center drop-shadow-md">
+              {PHOTO_GALLERY[currentIndex].caption}
+            </p>
           </div>
-          <p className="text-[10px] font-medium text-center text-[#55383C] mt-1.5 line-clamp-1 italic">
-            Forever with you
-          </p>
-        </motion.div>
 
-        {/* Item 2 - Square Top Right */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewportRepeat}
-          variants={fadeImg(0.1)}
-          onClick={() => openLightbox(1)}
-          className="relative col-span-1 rounded-2xl overflow-hidden shadow-md bg-white p-1.5 border border-[#7A121D]/15 cursor-pointer transform hover:-translate-y-1 transition-transform group mt-4"
-        >
-          <div className="relative aspect-square overflow-hidden rounded-xl">
-            <img
-              src={PHOTO_GALLERY[1].url}
-              alt="Khoảnh khắc ngọt ngào"
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          {/* Controls */}
+          <button
+            onClick={(e) => { e.stopPropagation(); prevSlide(); }}
+            className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/20 hover:bg-black/40 text-white rounded-full p-1.5 transition-colors"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+          <button
+            onClick={(e) => { e.stopPropagation(); nextSlide(); }}
+            className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/20 hover:bg-black/40 text-white rounded-full p-1.5 transition-colors"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
+          
+          {/* Enlarge icon hint */}
+          <div className="absolute top-3 right-3 bg-black/20 text-white rounded-full p-1.5 pointer-events-none">
+            <Maximize2 className="w-4 h-4" />
+          </div>
+        </div>
+
+        {/* Indicators */}
+        <div className="flex justify-center gap-2 mt-3 mb-1">
+          {PHOTO_GALLERY.map((_, idx) => (
+            <button
+              key={idx}
+              onClick={() => {
+                setIsAutoPlaying(false);
+                setCurrentIndex(idx);
+              }}
+              className={`h-1.5 rounded-full transition-all ${
+                idx === currentIndex ? 'bg-[#7A121D] w-5' : 'bg-[#7A121D]/30 w-2'
+              }`}
             />
-            <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white">
-              <Maximize2 className="w-5 h-5 drop-shadow" />
-            </div>
-          </div>
-          <p className="text-[10px] font-medium text-center text-[#55383C] mt-1.5 line-clamp-1 italic">
-            Nắm tay em đi qua bão giông
-          </p>
-        </motion.div>
-
-        {/* Item 3 - Square Bottom Left */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewportRepeat}
-          variants={fadeImg(0.2)}
-          onClick={() => openLightbox(2)}
-          className="relative col-span-1 rounded-2xl overflow-hidden shadow-md bg-white p-1.5 border border-[#7A121D]/15 cursor-pointer transform hover:-translate-y-1 transition-transform group"
-        >
-          <div className="relative aspect-square overflow-hidden rounded-xl">
-            <img
-              src={PHOTO_GALLERY[2].url}
-              alt="Khoảnh khắc ngọt ngào"
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-            />
-            <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white">
-              <Maximize2 className="w-5 h-5 drop-shadow" />
-            </div>
-          </div>
-          <p className="text-[10px] font-medium text-center text-[#55383C] mt-1.5 line-clamp-1 italic">
-            Ánh mắt trao nhau
-          </p>
-        </motion.div>
-
-        {/* Item 4 - Tall Bottom Right */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewportRepeat}
-          variants={fadeImg(0.3)}
-          onClick={() => openLightbox(3)}
-          className="relative col-span-1 rounded-2xl overflow-hidden shadow-md bg-white p-1.5 border border-[#7A121D]/15 cursor-pointer transform hover:-translate-y-1 transition-transform group -mt-4"
-        >
-          <div className="relative aspect-[3/4] overflow-hidden rounded-xl">
-            <img
-              src={PHOTO_GALLERY[3].url}
-              alt="Khoảnh khắc ngọt ngào"
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-            />
-            <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white">
-              <Maximize2 className="w-5 h-5 drop-shadow" />
-            </div>
-          </div>
-          <p className="text-[10px] font-medium text-center text-[#55383C] mt-1.5 line-clamp-1 italic">
-            Hạnh phúc giản đơn
-          </p>
-        </motion.div>
-
-      </div>
+          ))}
+        </div>
+      </motion.div>
 
       {/* Lightbox Modal */}
       {selectedPhotoIndex !== null && (
@@ -198,6 +185,7 @@ export function PhotoMomentsSection() {
               src={PHOTO_GALLERY[selectedPhotoIndex].url}
               alt="Ảnh phóng to"
               className="max-w-full max-h-[75vh] object-contain rounded-lg shadow-2xl"
+              style={{ imageRendering: 'high-quality' as any }}
             />
             <p className="text-white text-sm font-medium mt-3 text-center">
               {PHOTO_GALLERY[selectedPhotoIndex].caption}

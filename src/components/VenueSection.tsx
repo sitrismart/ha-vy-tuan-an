@@ -33,27 +33,34 @@ export function VenueSection() {
         variants={fadeUp(0.1)}
         className="mb-6 space-y-1"
       >
-        <p className="font-display text-sm font-semibold tracking-wider text-[#7A121D] uppercase">
-          {WEDDING_DATA.event.timeDisplay}
-        </p>
+        <div className="flex flex-col items-center justify-center my-6">
+          {/* Vertical line above */}
+          <div className="h-6 w-[1px] bg-[#7A121D]/30 mb-3"></div>
+          
+          <p className="font-serif text-[11px] font-semibold tracking-widest text-[#7A121D] uppercase mb-5">
+            {WEDDING_DATA.event.timeDisplay}, THỨ BẢY
+          </p>
 
-        <div className="flex items-center justify-center gap-3 py-2">
-          <div className="h-[1px] w-12 bg-[#7A121D]/40" />
-          <div className="flex items-baseline gap-1.5">
-            <span className="text-xs font-semibold uppercase tracking-wider text-[#7A121D]">
-              THÁNG 10
+          <div className="flex items-center justify-center gap-3">
+            <div className="flex flex-col items-center border-t border-b border-[#7A121D]/30 py-1.5 px-3 min-w-[90px]">
+              <span className="text-[10px] font-semibold uppercase tracking-widest text-[#7A121D]">
+                THÁNG {String(WEDDING_DATA.event.month).padStart(2, '0')}
+              </span>
+            </div>
+            
+            <span className="font-display text-5xl font-light text-[#7A121D] leading-none mx-2 translate-y-[-2px]">
+              {String(WEDDING_DATA.event.day).padStart(2, '0')}
             </span>
-            <span className="font-display text-4xl font-bold text-[#7A121D] px-1">
-              23
-            </span>
-            <span className="text-xs font-semibold uppercase tracking-wider text-[#7A121D]">
-              NĂM 2026
-            </span>
+
+            <div className="flex flex-col items-center border-t border-b border-[#7A121D]/30 py-1.5 px-3 min-w-[90px]">
+              <span className="text-[10px] font-semibold uppercase tracking-widest text-[#7A121D]">
+                NĂM {WEDDING_DATA.event.year}
+              </span>
+            </div>
           </div>
-          <div className="h-[1px] w-12 bg-[#7A121D]/40" />
         </div>
 
-        <p className="text-xs text-[#6A4D53] italic">
+        <p className="font-serif-elegant italic text-[#8C7377] text-sm">
           ({WEDDING_DATA.event.lunarDateDisplay})
         </p>
       </motion.div>
