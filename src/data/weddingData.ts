@@ -59,7 +59,7 @@ export const WEDDING_DATA = {
     venueSubName: 'Sảnh 1',
     venueAddress: '180-184 Hùng Vương, Đại Lộc, Đà Nẵng',
     mapLink: 'https://maps.app.goo.gl/q7aJeXMmAWsWyUu89',
-    googleCalendarUrl: 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=L%E1%BB%85+Th%C3%A0nh+H%C3%B4n+Tu%E1%BA%A5n+An+%26+H%E1%BA%A1+Vy&dates=20260919T033000Z/20260919T073000Z&details=Tr%C3%A2n+tr%E1%BB%8Dng+k%C3%ADnh+m%E1%BB%9Di+b%E1%BA%A1n+%C4%91%E1%BA%BFn+tham+d%E1%BB%B1+L%E1%BB%85+Th%C3%A0nh+H%C3%B4n+c%E1%BB%A7a+Tu%E1%BA%A5n+An+%26+H%E1%BA%A1+Vy+t%E1%BA%A1i+Hoa+Cau+Palace.&location=Hoa+Cau+Palace,+180-184+H%C3%B9ng+V%C6%B0%C6%A1ng,+%C4%90%E1%BA%A1i+L%E1%BB%99c,+%C4%90%C3%A0+N%E1%BA%B5ng',
+    googleCalendarUrl: 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=L%E1%BB%85+Th%C3%A0nh+H%C3%B4n+H%E1%BA%A1+Vy+%26+Tu%E1%BA%A5n+An&dates=20260919T033000Z/20260919T073000Z&details=Tr%C3%A2n+tr%E1%BB%8Dng+k%C3%ADnh+m%E1%BB%9Di+b%E1%BA%A1n+%C4%91%E1%BA%BFn+tham+d%E1%BB%B1+L%E1%BB%85+Th%C3%A0nh+H%C3%B4n+c%E1%BB%A7a+H%E1%BA%A1+Vy+%26+Tu%E1%BA%A5n+An+t%E1%BA%A1i+Hoa+Cau+Palace.&location=Hoa+Cau+Palace,+180-184+H%C3%B9ng+V%C6%B0%C6%A1ng,+%C4%90%E1%BA%A1i+L%E1%BB%99c,+%C4%90%C3%A0+N%E1%BA%B5ng',
   },
   quotes: {
     hero: 'SAVE the DATE',
@@ -78,8 +78,8 @@ export const WEDDING_DATA = {
 export const TIMELINE_ITEMS: TimelineItem[] = [
   {
     time: '09:00',
-    title: 'LỄ VU QUY',
-    description: 'Khoảnh khắc trao nhẫn và lời thề nguyện trăm năm',
+    title: 'LỄ ĐÍNH HÔN',
+    description: 'Nghi thức trao nhẫn và lời hẹn ước trăm năm',
     iconName: 'rings',
   },
   {

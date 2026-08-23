@@ -56,10 +56,10 @@ export default function App() {
         <header className="sticky top-0 z-40 bg-[#FAF6F0]/90 backdrop-blur-md px-4 py-3 border-b border-[#7A121D]/10 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <span className="font-script text-xl text-[#7A121D] font-bold">
-              {WEDDING_DATA.groom.shortName} & {WEDDING_DATA.bride.shortName}
+              {WEDDING_DATA.bride.shortName} & {WEDDING_DATA.groom.shortName}
             </span>
             <span className="text-[10px] uppercase font-semibold text-[#8C7377] tracking-wider hidden sm:inline">
-              • {WEDDING_DATA.event.day}.{WEDDING_DATA.event.month}.{WEDDING_DATA.event.year}
+              • {String(WEDDING_DATA.event.day).padStart(2, '0')}.{String(WEDDING_DATA.event.month).padStart(2, '0')}.{WEDDING_DATA.event.year}
             </span>
           </div>
 

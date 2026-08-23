@@ -17,11 +17,11 @@ export function VenueSection() {
         className="mb-6 relative"
       >
         <h3 className="font-display text-2xl md:text-3xl font-bold tracking-widest text-[#7A121D] uppercase">
-          {WEDDING_DATA.groom.shortName}
+          {WEDDING_DATA.bride.shortName}
         </h3>
         <span className="font-script text-3xl text-[#7A121D] block -my-2">&</span>
         <h3 className="font-display text-2xl md:text-3xl font-bold tracking-widest text-[#7A121D] uppercase">
-          {WEDDING_DATA.bride.shortName}
+          {WEDDING_DATA.groom.shortName}
         </h3>
       </motion.div>
 
@@ -38,7 +38,7 @@ export function VenueSection() {
           <div className="h-6 w-[1px] bg-[#7A121D]/30 mb-3"></div>
           
           <p className="font-serif text-[11px] font-semibold tracking-widest text-[#7A121D] uppercase mb-5">
-            {WEDDING_DATA.event.timeDisplay}, THỨ BẢY
+            {WEDDING_DATA.event.timeDisplay}
           </p>
 
           <div className="flex items-center justify-center gap-3">

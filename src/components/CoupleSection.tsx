@@ -42,9 +42,6 @@ export function CoupleSection() {
             <h4 className="font-display text-2xl md:text-3xl font-semibold tracking-wider uppercase text-white">
               {WEDDING_DATA.bride.shortName}
             </h4>
-            <p className="text-xs md:text-sm tracking-widest text-[#F4D9DF]/90 font-medium mt-0.5">
-              {WEDDING_DATA.bride.birthday}
-            </p>
           </motion.div>
 
           {/* Top Torn Paper Edge of Bride section */}
@@ -97,9 +94,6 @@ export function CoupleSection() {
             <h4 className="font-display text-2xl md:text-3xl font-semibold tracking-wider uppercase text-white">
               {WEDDING_DATA.groom.shortName}
             </h4>
-            <p className="text-xs md:text-sm tracking-widest text-[#F4D9DF]/90 font-medium mt-0.5">
-              {WEDDING_DATA.groom.birthday}
-            </p>
           </motion.div>
 
           {/* Big 3D White Flower Cluster at Bottom Right (Exact design from user's image) */}

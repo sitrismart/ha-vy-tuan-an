@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
+import { Heart } from 'lucide-react';
 import { WEDDING_DATA } from '../data/weddingData';
 import { WeddingCountdown } from './WeddingCountdown';
 import { BurgundyCallaLily } from './FloralDecor';
@@ -23,7 +24,7 @@ export function HeroSection() {
         <ParallaxLayer strength={16}>
           <img
             src={WEDDING_DATA.images.heroCover}
-            alt={`${WEDDING_DATA.groom.shortName} & ${WEDDING_DATA.bride.shortName}`}
+            alt={`${WEDDING_DATA.bride.shortName} & ${WEDDING_DATA.groom.shortName}`}
             className="w-full h-full object-cover object-[center_35%] transform group-hover:scale-105 transition-transform duration-700 filter brightness-90"
           />
         </ParallaxLayer>
@@ -48,8 +49,8 @@ export function HeroSection() {
           <h1 className="font-display text-4xl md:text-5xl font-bold tracking-[0.2em] uppercase text-white drop-shadow-lg">
             DATE
           </h1>
-          <p className="font-display text-xs md:text-sm tracking-[0.25em] text-[#EADBC8] uppercase font-semibold mt-2">
-            {WEDDING_DATA.groom.shortName} & {WEDDING_DATA.bride.shortName}
+          <p className="font-display text-xs md:text-sm tracking-[0.25em] text-[#F4D9DF] uppercase font-semibold mt-2">
+            {WEDDING_DATA.bride.shortName} & {WEDDING_DATA.groom.shortName}
           </p>
         </motion.div>
       </motion.div>
@@ -66,13 +67,13 @@ export function HeroSection() {
         >
           <div className="relative flex items-center justify-center">
             <span className="font-serif-elegant text-5xl md:text-6xl text-[#7A121D] font-light italic">
-              {groomInitial}
+              {brideInitial}
             </span>
             <span className="font-script text-3xl text-[#8E6E53] -mx-1.5 z-10">
               &
             </span>
             <span className="font-serif-elegant text-5xl md:text-6xl text-[#7A121D] font-light italic">
-              {brideInitial}
+              {groomInitial}
             </span>
           </div>
         </motion.div>
@@ -113,8 +114,8 @@ export function HeroSection() {
               alt="Mini 2"
               className="w-full h-full object-cover"
             />
-            <span className="absolute inset-0 flex items-end justify-center pb-2 font-serif-elegant text-lg md:text-xl font-bold text-white/90 drop-shadow-md">
-              /
+            <span className="absolute inset-0 flex items-end justify-center pb-1 font-display text-xl md:text-2xl font-bold text-white/90 drop-shadow-md">
+              {String(WEDDING_DATA.event.month).padStart(2, '0')}
             </span>
           </div>
 
@@ -125,7 +126,7 @@ export function HeroSection() {
               className="w-full h-full object-cover"
             />
             <span className="absolute inset-0 flex items-end justify-center pb-1 font-display text-xl md:text-2xl font-bold text-white/90 drop-shadow-md">
-              {String(WEDDING_DATA.event.month).padStart(2, '0')}
+              {WEDDING_DATA.event.year}
             </span>
           </div>
 
@@ -135,8 +136,8 @@ export function HeroSection() {
               alt="Mini 4"
               className="w-full h-full object-cover"
             />
-            <span className="absolute inset-0 flex items-end justify-center pb-1 font-display text-xl md:text-2xl font-bold text-white/90 drop-shadow-md">
-              {String(WEDDING_DATA.event.year).slice(-2)}
+            <span className="absolute inset-0 flex items-end justify-center pb-1.5">
+              <Heart className="w-5 h-5 md:w-6 md:h-6 fill-white/90 text-white/90 drop-shadow-md" />
             </span>
           </div>
         </motion.div>
