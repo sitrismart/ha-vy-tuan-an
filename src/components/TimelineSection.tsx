@@ -135,7 +135,7 @@ export function TimelineSection() {
                 <h4 className="font-display text-xs font-bold tracking-wider text-[#2D1217] uppercase mt-1">
                   {item.title}
                 </h4>
-                <p className={`text-[11px] text-[#6A4D53] mt-0.5 ${index === 0 ? 'max-w-[200px]' : 'max-w-[180px]'}`}>
+                <p className={`text-[11px] text-[#6A4D53] mt-0.5 ${index === 1 ? 'max-w-[200px]' : 'max-w-[140px]'}`}>
                   {item.description}
                 </p>
                 <div className="mt-2 w-10 h-10 rounded-full bg-white border border-[#7A121D]/30 flex items-center justify-center text-[#7A121D] shadow-sm">

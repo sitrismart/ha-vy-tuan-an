@@ -118,7 +118,7 @@ export function RSVPSection({ prefillName }: { prefillName?: string }) {
         name,
         wishes: formData.wishes.trim(),
         attendance: formData.attendance,
-        companions: formData.companions,
+        companions: formData.attendance === 'yes' ? formData.companions : '0',
         invited_by: formData.invitedBy,
       }),
       supabase.from('wishes').insert({
@@ -257,19 +257,21 @@ export function RSVPSection({ prefillName }: { prefillName?: string }) {
               </div>
 
               {/* Bạn có tham dự cùng ai khác không? */}
-              <div className="relative">
-                <select
-                  value={formData.companions}
-                  onChange={(e) => setFormData({ ...formData, companions: e.target.value })}
-                  className="w-full px-4 pr-9 py-2.5 rounded-xl bg-[#FAF6F0] border border-[#7A121D]/20 text-xs text-[#2D1217] focus:outline-none focus:ring-2 focus:ring-[#7A121D]/40 transition-all cursor-pointer appearance-none"
-                >
-                  <option value="0">Bạn có tham dự cùng ai không: Đi một mình</option>
-                  <option value="1">Tham dự cùng 1 người (+1 người)</option>
-                  <option value="2">Tham dự cùng 2 người (+2 người)</option>
-                  <option value="family">Tham dự cùng cả gia đình</option>
-                </select>
-                <ChevronDown className="w-4 h-4 text-[#7A121D]/60 absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
-              </div>
+              {formData.attendance === 'yes' && (
+                <div className="relative">
+                  <select
+                    value={formData.companions}
+                    onChange={(e) => setFormData({ ...formData, companions: e.target.value })}
+                    className="w-full px-4 pr-9 py-2.5 rounded-xl bg-[#FAF6F0] border border-[#7A121D]/20 text-xs text-[#2D1217] focus:outline-none focus:ring-2 focus:ring-[#7A121D]/40 transition-all cursor-pointer appearance-none"
+                  >
+                    <option value="0">Bạn có tham dự cùng ai không: Đi một mình</option>
+                    <option value="1">Tham dự cùng 1 người (+1 người)</option>
+                    <option value="2">Tham dự cùng 2 người (+2 người)</option>
+                    <option value="family">Tham dự cùng cả gia đình</option>
+                  </select>
+                  <ChevronDown className="w-4 h-4 text-[#7A121D]/60 absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                </div>
+              )}
 
               {/* Bạn là khách mời của ai? */}
               <div className="relative">

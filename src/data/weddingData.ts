@@ -85,11 +85,11 @@ export const TIMELINE_ITEMS: TimelineItem[] = [
   {
     time: '10:30',
     title: 'ĐÓN KHÁCH',
-    description: 'Khai vị, chúc rượu cùng ẩm thực tinh hoa',
+    description: 'Gia đình đón tiếp khách quý và chụp ảnh lưu niệm',
     iconName: 'feast',
   },
   {
-    time: '11:00',
+    time: '11:30',
     title: 'KHAI TIỆC',
     description: 'Khai vị, chúc rượu cùng ẩm thực tinh hoa',
     iconName: 'music',
