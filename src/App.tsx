@@ -11,7 +11,6 @@ import { WEDDING_DATA } from './data/weddingData';
 import { supabase } from './lib/supabaseClient';
 import { 
   Heart, 
-  MapPin, 
   Calendar, 
   CheckSquare, 
   Smartphone,
@@ -58,8 +57,8 @@ export default function App() {
             <span className="font-script text-xl text-[#7A121D] font-bold">
               {WEDDING_DATA.bride.shortName} & {WEDDING_DATA.groom.shortName}
             </span>
-            <span className="text-[10px] uppercase font-semibold text-[#8C7377] tracking-wider hidden sm:inline">
-              • {String(WEDDING_DATA.event.day).padStart(2, '0')}.{String(WEDDING_DATA.event.month).padStart(2, '0')}.{WEDDING_DATA.event.year}
+            <span className="text-[10px] uppercase font-semibold text-[#8C7377] tracking-wider">
+              • {WEDDING_DATA.event.dateDot}
             </span>
           </div>
 
@@ -95,16 +94,6 @@ export default function App() {
             <Heart className="w-4 h-4" />
             <span className="text-[9px] font-medium mt-0.5">Trang Đầu</span>
           </button>
-
-          <a
-            href={WEDDING_DATA.event.mapLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex flex-col items-center text-[#7A121D] hover:text-[#550C14] transition-colors p-1"
-          >
-            <MapPin className="w-4 h-4" />
-            <span className="text-[9px] font-medium mt-0.5">Chỉ Đường</span>
-          </a>
 
           <button
             onClick={() => scrollToSection('rsvp-section')}

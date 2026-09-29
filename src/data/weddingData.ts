@@ -1,11 +1,23 @@
 import { TimelineItem, PhotoMoment, BankAccount, WishMessage } from '../types';
 
+// =========================================================================
+// ⭐ NGÀY & GIỜ CƯỚI: CHỈ CẦN SỬA 2 DÒNG NÀY, TOÀN BỘ THIỆP SẼ TỰ CẬP NHẬT
+// (Lưu ý: ngày âm lịch `lunarDateDisplay` bên dưới vẫn cần sửa tay)
+// =========================================================================
+const WEDDING_DATE = '2026-10-17'; // Định dạng YYYY-MM-DD
+const WEDDING_TIME = '10:30'; // Định dạng HH:mm (giờ Việt Nam)
+
+const [WEDDING_YEAR, WEDDING_MONTH, WEDDING_DAY] = WEDDING_DATE.split('-').map(Number);
+const WEEKDAYS = ['Chủ Nhật', 'Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy'];
+const WEEKDAY = WEEKDAYS[new Date(Date.UTC(WEDDING_YEAR, WEDDING_MONTH - 1, WEDDING_DAY)).getUTCDay()];
+const pad2 = (n: number) => String(n).padStart(2, '0');
+const SOLAR_DATE = `${WEDDING_DATE}T${WEDDING_TIME}:00+07:00`;
+
 export const WEDDING_DATA = {
   groom: {
     name: 'NGUYỄN TUẤN AN',
     shortName: 'Tuấn An',
     role: 'Chú Rể',
-    birthday: '19.02.1998',
     parents: {
       father: 'Nguyễn Văn Lai',
       mother: 'Nguyễn Thị Thanh',
@@ -16,7 +28,6 @@ export const WEDDING_DATA = {
     name: 'NGUYỄN THANH HẠ VY',
     shortName: 'Hạ Vy',
     role: 'Cô Dâu',
-    birthday: '05.09.1998',
     parents: {
       father: 'Nguyễn Thành Vỹ',
       mother: 'Nguyễn Thị Thanh Thúy',
@@ -36,7 +47,7 @@ export const WEDDING_DATA = {
     // 3. Ảnh chân dung chú rể (phần viền xé)
     groomPortrait: '/images/chan-dung-cr-3.jpg',
 
-    // 4. 4 tấm ảnh polaroid mini hiển thị số ngày (19 / 09 / 26)
+    // 4. 4 tấm ảnh polaroid mini hiển thị số ngày (ngày / tháng / năm)
     miniPolaroids: [
       '/images/polaroidmini-4-1.jpg',
       '/images/polaroimini-4-2.jpg',
@@ -48,18 +59,18 @@ export const WEDDING_DATA = {
     footerCover: '/images/anh-chan-trang-5.jpg',
   },
   event: {
-    solarDate: '2026-09-19T10:30:00+07:00',
-    dateDisplay: 'Thứ Bảy, 19 Tháng 9, 2026',
-    timeDisplay: '10:30, THỨ BẢY',
-    day: 19,
-    month: 9,
-    year: 2026,
-    lunarDateDisplay: 'Tức ngày 09 tháng 08 năm Bính Ngọ',
-    venueName: 'HOA CAU PALACE',
-    venueSubName: 'Sảnh 1',
-    venueAddress: '180-184 Hùng Vương, Đại Lộc, Đà Nẵng',
-    mapLink: 'https://maps.app.goo.gl/q7aJeXMmAWsWyUu89',
-    googleCalendarUrl: 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=L%E1%BB%85+Th%C3%A0nh+H%C3%B4n+H%E1%BA%A1+Vy+%26+Tu%E1%BA%A5n+An&dates=20260919T033000Z/20260919T073000Z&details=Tr%C3%A2n+tr%E1%BB%8Dng+k%C3%ADnh+m%E1%BB%9Di+b%E1%BA%A1n+%C4%91%E1%BA%BFn+tham+d%E1%BB%B1+L%E1%BB%85+Th%C3%A0nh+H%C3%B4n+c%E1%BB%A7a+H%E1%BA%A1+Vy+%26+Tu%E1%BA%A5n+An+t%E1%BA%A1i+Hoa+Cau+Palace.&location=Hoa+Cau+Palace,+180-184+H%C3%B9ng+V%C6%B0%C6%A1ng,+%C4%90%E1%BA%A1i+L%E1%BB%99c,+%C4%90%C3%A0+N%E1%BA%B5ng',
+    // Các giá trị ngày tháng dưới đây được tự động tính từ WEDDING_DATE / WEDDING_TIME ở đầu file
+    solarDate: SOLAR_DATE,
+    dateDisplay: `${WEEKDAY}, ${WEDDING_DAY} Tháng ${WEDDING_MONTH}, ${WEDDING_YEAR}`,
+    timeDisplay: `${WEDDING_TIME}, ${WEEKDAY.toUpperCase()}`,
+    dateDot: `${pad2(WEDDING_DAY)}.${pad2(WEDDING_MONTH)}.${WEDDING_YEAR}`, // 17.10.2026
+    dateSlash: `${pad2(WEDDING_DAY)}/${pad2(WEDDING_MONTH)}/${WEDDING_YEAR}`, // 17/10/2026
+    day: WEDDING_DAY,
+    month: WEDDING_MONTH,
+    year: WEDDING_YEAR,
+    lunarDateDisplay: 'Tức ngày 08 tháng 09 năm Bính Ngọ',
+    venueName: 'TƯ GIA NAM',
+    venueAddress: 'Ấp Tân Đức A, xã Tân Thành Bình, tỉnh Vĩnh Long (Bến Tre cũ)',
   },
   quotes: {
     hero: 'SAVE the DATE',
@@ -78,7 +89,7 @@ export const WEDDING_DATA = {
 export const TIMELINE_ITEMS: TimelineItem[] = [
   {
     time: '09:00',
-    title: 'LỄ ĐÍNH HÔN',
+    title: 'LỄ THÀNH HÔN',
     description: 'Nghi thức trao nhẫn và lời hẹn ước trăm năm',
     iconName: 'rings',
   },

@@ -59,7 +59,7 @@ export function FooterClosingSection() {
         className="text-center pt-8 px-4 text-[#8C7377] text-[11px] space-y-1"
       >
         <p className="font-display tracking-widest text-[#7A121D] uppercase font-semibold">
-          {WEDDING_DATA.bride.shortName} & {WEDDING_DATA.groom.shortName} • {String(WEDDING_DATA.event.day).padStart(2, '0')}.{String(WEDDING_DATA.event.month).padStart(2, '0')}.{WEDDING_DATA.event.year}
+          {WEDDING_DATA.bride.shortName} & {WEDDING_DATA.groom.shortName} • {WEDDING_DATA.event.dateDot}
         </p>
         <p className="opacity-80">
           Made with love & happiness for the bride & groom

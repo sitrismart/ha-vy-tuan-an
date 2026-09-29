@@ -1,11 +1,24 @@
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
-import {defineConfig} from 'vite';
+import {defineConfig, type Plugin} from 'vite';
+import {WEDDING_DATA} from './src/data/weddingData';
+
+// Thay ngày cưới trong index.html bằng giá trị từ src/data/weddingData.ts
+function weddingDateHtml(): Plugin {
+  return {
+    name: 'wedding-date-html',
+    transformIndexHtml(html) {
+      return html
+        .replaceAll('%WEDDING_DATE_DOT%', WEDDING_DATA.event.dateDot)
+        .replaceAll('%WEDDING_DATE_SLASH%', WEDDING_DATA.event.dateSlash);
+    },
+  };
+}
 
 export default defineConfig(() => {
   return {
-    plugins: [react(), tailwindcss()],
+    plugins: [react(), tailwindcss(), weddingDateHtml()],
     resolve: {
       alias: {
         '@': path.resolve(__dirname, '.'),

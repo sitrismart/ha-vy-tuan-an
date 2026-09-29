@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { WEDDING_DATA } from '../data/weddingData';
-import { MapPin, Navigation, ExternalLink, Building2 } from 'lucide-react';
+import { Building2 } from 'lucide-react';
 import { BurgundyCallaLily } from './FloralDecor';
 import { fadeUp, fadeUpTitle, viewportRepeat } from './motion/Reveal';
 
@@ -83,25 +83,9 @@ export function VenueSection() {
         <h4 className="font-display text-lg font-bold text-[#2D1217] tracking-wider uppercase">
           {WEDDING_DATA.event.venueName}
         </h4>
-        <p className="text-xs text-[#7A121D] font-medium">
-          {WEDDING_DATA.event.venueSubName}
-        </p>
         <p className="text-xs text-[#6A4D53] leading-relaxed">
           {WEDDING_DATA.event.venueAddress}
         </p>
-
-        {/* Action Button: Xem chỉ đường */}
-        <div className="pt-2 flex justify-center">
-          <a
-            href={WEDDING_DATA.event.mapLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-1.5 py-2.5 px-4 rounded-xl bg-[#7A121D] hover:bg-[#600D16] text-white text-xs font-semibold tracking-wider uppercase shadow-xs transition-colors"
-          >
-            <MapPin className="w-3.5 h-3.5" />
-            <span>XEM CHỈ ĐƯỜNG</span>
-          </a>
-        </div>
       </motion.div>
     </section>
   );
