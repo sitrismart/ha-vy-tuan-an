@@ -94,13 +94,13 @@ export const TIMELINE_ITEMS: TimelineItem[] = [
     iconName: 'rings',
   },
   {
-    time: '10:30',
+    time: '09:30',
     title: 'ĐÓN KHÁCH',
     description: 'Gia đình đón tiếp khách quý và chụp ảnh lưu niệm',
     iconName: 'feast',
   },
   {
-    time: '11:30',
+    time: '10:00',
     title: 'KHAI TIỆC',
     description: 'Khai vị, chúc rượu cùng ẩm thực tinh hoa',
     iconName: 'music',
