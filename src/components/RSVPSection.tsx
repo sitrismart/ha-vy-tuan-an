@@ -84,6 +84,16 @@ export function RSVPSection({ prefillName }: { prefillName?: string }) {
           });
         }
       )
+      .on(
+        'postgres_changes',
+        { event: 'DELETE', schema: 'public', table: 'wishes' },
+        (payload) => {
+          const oldRow = payload.old as { id?: string };
+          if (oldRow?.id) {
+            setWishesList((prev) => prev.filter((w) => w.id !== oldRow.id));
+          }
+        }
+      )
       .subscribe();
 
     return () => {

@@ -143,10 +143,11 @@ function RSVPListTab() {
       supabase.from('wishes').delete().eq('author', targetRow.name),
     ]);
 
-    if (rsvpRes.error) {
-      setError(rsvpRes.error.message);
+    if (rsvpRes.error || wishRes.error) {
+      const errMsg = rsvpRes.error?.message || wishRes.error?.message || 'Có lỗi xảy ra khi xóa.';
+      console.error('Failed to delete:', rsvpRes.error || wishRes.error);
+      setError(errMsg);
     } else {
-      if (wishRes.error) console.error('Failed to delete wish:', wishRes.error);
       setRows((prev) => prev.filter((row) => row.id !== targetRow.id));
     }
     setPendingDelete(null);

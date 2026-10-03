@@ -30,7 +30,7 @@ alter table public.invite_links enable row level security;
 -- "Automatically expose new tables" is off, so the anon role needs explicit
 -- table-level grants; RLS policies alone are not enough for PostgREST access.
 grant select, insert, delete on public.rsvps to anon;
-grant select, insert on public.wishes to anon;
+grant select, insert, delete on public.wishes to anon;
 grant select, insert, delete on public.invite_links to anon;
 
 create policy "Allow public insert on rsvps"
@@ -57,6 +57,11 @@ create policy "Allow public insert on wishes"
 
 create policy "Allow public read on wishes"
   on public.wishes for select
+  to anon
+  using (true);
+
+create policy "Allow public delete on wishes"
+  on public.wishes for delete
   to anon
   using (true);
 
