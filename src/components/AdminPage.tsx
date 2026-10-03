@@ -137,10 +137,18 @@ function RSVPListTab() {
       });
   }, []);
 
-  const handleDelete = async (id: string) => {
-    const { error } = await supabase.from('rsvps').delete().eq('id', id);
-    if (error) setError(error.message);
-    else setRows((prev) => prev.filter((row) => row.id !== id));
+  const handleDelete = async (targetRow: RSVPRow) => {
+    const [rsvpRes, wishRes] = await Promise.all([
+      supabase.from('rsvps').delete().eq('id', targetRow.id),
+      supabase.from('wishes').delete().eq('author', targetRow.name),
+    ]);
+
+    if (rsvpRes.error) {
+      setError(rsvpRes.error.message);
+    } else {
+      if (wishRes.error) console.error('Failed to delete wish:', wishRes.error);
+      setRows((prev) => prev.filter((row) => row.id !== targetRow.id));
+    }
     setPendingDelete(null);
   };
 
@@ -189,9 +197,9 @@ function RSVPListTab() {
       {selectedRow && <RSVPDetailModal row={selectedRow} onClose={() => setSelectedRow(null)} />}
       {pendingDelete && (
         <ConfirmDeleteModal
-          message={`Xóa xác nhận tham dự của "${pendingDelete.name}"? Hành động này không thể hoàn tác.`}
+          message={`Xóa xác nhận tham dự và lời chúc của "${pendingDelete.name}"? Hành động này không thể hoàn tác.`}
           onCancel={() => setPendingDelete(null)}
-          onConfirm={() => handleDelete(pendingDelete.id)}
+          onConfirm={() => handleDelete(pendingDelete)}
         />
       )}
     </>

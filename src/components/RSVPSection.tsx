@@ -224,10 +224,16 @@ export function RSVPSection({ prefillName }: { prefillName?: string }) {
                 <input
                   type="text"
                   required
+                  readOnly={Boolean(prefillName)}
                   placeholder="Tên của bạn *"
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full px-4 py-2.5 rounded-xl bg-[#FAF6F0] border border-[#7A121D]/20 text-xs text-[#2D1217] placeholder:text-[#8C7377] focus:outline-none focus:ring-2 focus:ring-[#7A121D]/40 transition-all"
+                  className={`w-full px-4 py-2.5 rounded-xl border text-xs text-[#2D1217] placeholder:text-[#8C7377] transition-all ${
+                    prefillName
+                      ? 'bg-[#7A121D]/5 border-[#7A121D]/30 cursor-not-allowed font-semibold text-[#7A121D]'
+                      : 'bg-[#FAF6F0] border-[#7A121D]/20 focus:outline-none focus:ring-2 focus:ring-[#7A121D]/40'
+                  }`}
+                  title={prefillName ? 'Tên khách mời đã được chọn theo link mời' : undefined}
                 />
               </div>
 

@@ -20,10 +20,17 @@ import {
 export default function App() {
   const [guestName, setGuestName] = useState<string | undefined>(undefined);
 
-  // Personalized invite links (e.g. /Vo-Van-Nam) prefill the RSVP form with the guest's name.
+  // Personalized invite links (e.g. /Vo-Van-Nam or /Trung-Hoa-+-❤) prefill the RSVP form with the guest's name.
   useEffect(() => {
-    const slug = window.location.pathname.replace(/^\//, '');
-    if (!slug || slug === 'admin') return;
+    const rawSlug = window.location.pathname.replace(/^\//, '');
+    if (!rawSlug || rawSlug === 'admin') return;
+
+    let slug = rawSlug;
+    try {
+      slug = decodeURIComponent(rawSlug);
+    } catch (e) {
+      // Ignore decoding errors, fallback to rawSlug
+    }
 
     supabase
       .from('invite_links')
